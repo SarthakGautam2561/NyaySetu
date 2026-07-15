@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="NyaySetu - AI-powered multilingual legal assistant for every citizen.">
+<title>NyaySetu | AI-Powered Legal Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="/static/css/styles.css"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x2696;</text></svg>">
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{
+colors:{"secondary-fixed":"#e2dfff","outline-variant":"#c3c6d7","surface-container-high":"#e7e8e9","primary-fixed":"#dbe1ff","tertiary-container":"#bc4800","inverse-primary":"#b4c5ff","on-primary-fixed-variant":"#003ea8","surface-tint":"#0053db","primary-container":"#2563eb","on-primary":"#ffffff","surface-variant":"#e1e3e4","inverse-surface":"#2e3132","primary-fixed-dim":"#b4c5ff","on-tertiary-container":"#ffede6","surface-container-low":"#f3f4f5","tertiary-fixed-dim":"#ffb596","on-secondary-fixed":"#0f0069","on-error-container":"#93000a","on-primary-fixed":"#00174b","on-tertiary-fixed-variant":"#7d2d00","surface-container-highest":"#e1e3e4","on-tertiary":"#ffffff","background":"#f8f9fa","surface-container":"#edeeef","on-surface":"#191c1d","on-surface-variant":"#434655","surface":"#f8f9fa","inverse-on-surface":"#f0f1f2","tertiary":"#943700","outline":"#737686","on-primary-container":"#eeefff","surface-bright":"#f8f9fa","secondary":"#4b41e1","on-secondary-container":"#fffbff","on-tertiary-fixed":"#360f00","error":"#ba1a1a","error-container":"#ffdad6","on-background":"#191c1d","surface-container-lowest":"#ffffff","secondary-fixed-dim":"#c3c0ff","surface-dim":"#d9dadb","secondary-container":"#645efb","on-error":"#ffffff","on-secondary-fixed-variant":"#3323cc","tertiary-fixed":"#ffdbcd","on-secondary":"#ffffff","primary":"#004ac6"},
+borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},
+spacing:{md:"1.5rem",xs:"0.5rem",gutter:"24px",xl:"3rem",lg:"2rem",sm:"1rem",base:"4px","container-max":"1280px"},
+fontFamily:{"body-md":["Inter"],"label-sm":["Inter"],"headline-lg-mobile":["Inter"],"label-md":["Inter"],"headline-md":["Inter"],"headline-xl":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"]},
+fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12px",{lineHeight:"1.2",fontWeight:"600"}],"headline-lg-mobile":["24px",{lineHeight:"1.2",fontWeight:"600"}],"label-md":["14px",{lineHeight:"1.4",letterSpacing:"0.01em",fontWeight:"500"}],"headline-md":["24px",{lineHeight:"1.3",fontWeight:"600"}],"headline-xl":["48px",{lineHeight:"1.1",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-lg":["32px",{lineHeight:"1.2",letterSpacing:"-0.01em",fontWeight:"600"}],"body-lg":["18px",{lineHeight:"1.6",fontWeight:"400"}]}
+}}}
+</script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ==================== SIDEBAR (shown on app views) ==================== -->
+<aside class="sidebar hidden h-screen w-64 fixed left-0 top-0 bg-white/70 backdrop-blur-md border-r border-primary/10 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.04)] flex-col py-md px-sm z-[60]" id="app-sidebar">
+  <div class="px-xs mb-lg">
+    <h1 class="font-headline-md text-headline-md font-bold text-primary cursor-pointer" onclick="NyaySetu.App.navigate('landing')">NyaySetu</h1>
+    <p class="text-on-surface-variant/70 text-label-sm mt-1">Precise Advocate AI</p>
+  </div>
+  <nav class="flex-1 flex flex-col space-y-1" id="sidebarNav">
+    <a class="sidebar-link flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors duration-200 active:scale-95 rounded-lg cursor-pointer" data-view="dashboard" onclick="NyaySetu.App.navigate('dashboard')">
+      <span class="material-symbols-outlined">dashboard</span><span>Dashboard</span>
+    </a>
+    <a class="sidebar-link flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors duration-200 active:scale-95 rounded-lg cursor-pointer" data-view="chat" onclick="NyaySetu.App.navigate('chat')">
+      <span class="material-symbols-outlined">add_circle</span><span>New Analysis</span>
+    </a>
+    <a class="sidebar-link flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors duration-200 active:scale-95 rounded-lg cursor-pointer" data-view="document" onclick="NyaySetu.App.navigate('document')">
+      <span class="material-symbols-outlined">document_scanner</span><span>Document X-Ray</span>
+    </a>
+    <a class="sidebar-link flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors duration-200 active:scale-95 rounded-lg cursor-pointer" data-view="drafts" onclick="NyaySetu.App.navigate('drafts')">
+      <span class="material-symbols-outlined">description</span><span>Legal Drafts</span>
+    </a>
+    <a class="sidebar-link flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors duration-200 active:scale-95 rounded-lg cursor-pointer" data-view="pathway" onclick="NyaySetu.App.navigate('pathway')">
+      <span class="material-symbols-outlined">assignment_turned_in</span><span>Legal Pathway</span>
+    </a>
+    <a class="sidebar-link flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors duration-200 active:scale-95 rounded-lg cursor-pointer" data-view="voice" onclick="NyaySetu.App.navigate('voice')">
+      <span class="material-symbols-outlined">record_voice_over</span><span>Voice Mode</span>
+    </a>
+    <a class="sidebar-link flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors duration-200 active:scale-95 rounded-lg cursor-pointer" data-view="rights" onclick="NyaySetu.App.navigate('rights')">
+      <span class="material-symbols-outlined">gavel</span><span>Know Your Rights</span>
+    </a>
+    <div class="mt-auto pt-lg space-y-1">
+      <a class="flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors rounded-lg cursor-pointer"><span class="material-symbols-outlined">settings</span><span>Settings</span></a>
+      <a class="flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors rounded-lg cursor-pointer"><span class="material-symbols-outlined">help</span><span>Help</span></a>
+    </div>
+  </nav>
+  <div class="mt-lg p-sm bg-primary/5 rounded-xl">
+    <p class="text-label-sm font-bold text-primary mb-1">Gemma 4 Powered</p>
+    <p class="text-[11px] text-outline-variant mb-3 leading-tight">Multilingual reasoning + document analysis + action plans.</p>
+    <button class="w-full py-xs bg-primary text-on-primary rounded-lg text-label-md font-bold transition-transform active:scale-95">Upgrade to Pro</button>
+  </div>
+</aside>
+
+<!-- ==================== TOP BAR (shown on app views) ==================== -->
+<header class="top-bar hidden justify-between items-center w-full px-gutter h-16 sticky top-0 z-50 glass-effect border-b border-primary/10 md:ml-64 md:max-w-[calc(100%-16rem)]" id="app-header">
+  <div class="flex items-center gap-lg">
+    <span class="md:hidden font-headline-md text-headline-md font-bold text-primary">NyaySetu</span>
+    <div class="hidden sm:flex items-center bg-surface-container-low px-sm py-1.5 rounded-full w-64 border border-outline-variant/30">
+      <span class="material-symbols-outlined text-outline text-[20px]">search</span>
+      <input class="bg-transparent border-none focus:ring-0 text-label-md w-full ml-xs" placeholder="Search laws or case files..." type="text"/>
+    </div>
+  </div>
+  <div class="flex items-center gap-md">
+    <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container">notifications</button>
+    <div class="relative group">
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container">language</button>
+      <div class="absolute right-0 mt-1 w-36 bg-white rounded-lg shadow-xl border border-primary/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
+        <span id="langLabel" class="hidden">English</span>
+        <a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-primary/5 hover:text-primary cursor-pointer" onclick="NyaySetu.I18n.setLanguage('en')">English</a>
+        <a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-primary/5 hover:text-primary cursor-pointer" onclick="NyaySetu.I18n.setLanguage('hi')">Hindi</a>
+        <a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-primary/5 hover:text-primary cursor-pointer" onclick="NyaySetu.I18n.setLanguage('bn')">Bengali</a>
+        <a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-primary/5 hover:text-primary cursor-pointer" onclick="NyaySetu.I18n.setLanguage('ta')">Tamil</a>
+        <a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-primary/5 hover:text-primary cursor-pointer" onclick="NyaySetu.I18n.setLanguage('te')">Telugu</a>
+      </div>
+    </div>
+    <div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden border border-primary/20">
+      <div class="w-full h-full bg-primary/20 flex items-center justify-center text-primary text-label-sm font-bold">U</div>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== LANDING PAGE ==================== -->
+<section id="view-landing" class="view active">
+  <aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-primary/10 bg-white/70 backdrop-blur-md shadow-[0_10px_25px_-5px_rgba(0,0,0,0.04)] z-[60] py-md px-sm">
+    <div class="px-xs mb-lg"><span class="font-headline-md text-headline-md font-bold text-primary">NyaySetu</span><p class="text-on-surface-variant/70 text-label-sm mt-1">Precise Advocate AI</p></div>
+    <nav class="flex-1 flex flex-col space-y-1">
+      <a class="flex items-center gap-3 px-sm py-xs text-primary font-bold border-r-2 border-primary hover:bg-primary/5 transition-colors cursor-pointer" onclick="NyaySetu.App.navigate('dashboard')"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
+      <a class="flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer" onclick="NyaySetu.App.navigate('chat')"><span class="material-symbols-outlined">add_circle</span><span>New Analysis</span></a>
+      <a class="flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer" onclick="NyaySetu.App.navigate('dashboard')"><span class="material-symbols-outlined">history</span><span>History</span></a>
+      <a class="flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer" onclick="NyaySetu.App.navigate('document')"><span class="material-symbols-outlined">description</span><span>Documents</span></a>
+      <div class="mt-auto pt-lg space-y-1">
+        <a class="flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer"><span class="material-symbols-outlined">settings</span><span>Settings</span></a>
+        <a class="flex items-center gap-3 px-sm py-xs text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer"><span class="material-symbols-outlined">help</span><span>Help</span></a>
+      </div>
+    </nav>
+    <div class="mt-lg p-sm bg-primary/5 rounded-xl">
+      <p class="text-label-sm font-bold text-primary mb-2">Upgrade to Pro</p>
+      <button class="w-full py-xs bg-primary text-on-primary rounded-lg text-label-md font-bold transition-transform active:scale-95">Get Unlimited Access</button>
+    </div>
+  </aside>
+  <header class="flex justify-between items-center w-full px-gutter h-16 sticky top-0 z-50 glass-effect border-b border-primary/10 md:ml-64 md:max-w-[calc(100%-16rem)]">
+    <div class="flex items-center gap-lg">
+      <span class="md:hidden font-headline-md text-headline-md font-bold text-primary">NyaySetu</span>
+      <div class="hidden sm:flex items-center bg-surface-container-low px-sm py-1.5 rounded-full w-64 border border-outline-variant/30">
+        <span class="material-symbols-outlined text-outline text-[20px]">search</span>
+        <input class="bg-transparent border-none focus:ring-0 text-label-md w-full ml-xs" placeholder="Search laws or case files..." type="text"/>
+      </div>
+    </div>
+    <div class="flex items-center gap-md">
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container">notifications</button>
+      <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container">language</button>
+      <div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden border border-primary/20"><div class="w-full h-full bg-primary/20 flex items-center justify-center text-primary text-label-sm font-bold">U</div></div>
+    </div>
+  </header>
+  <main class="md:ml-64 min-h-screen">
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-xl pb-24 px-gutter max-w-container-max mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant text-label-sm font-bold mb-md">
+            <span class="material-symbols-outlined text-[16px]">verified</span>AI-POWERED JUSTICE FOR ALL
+          </div>
+          <h1 class="font-headline-xl text-headline-xl text-on-surface leading-tight mb-sm">AI-Powered Legal Assistant for Every Citizen</h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-lg">Understand your rights, analyze legal situations, retrieve relevant laws, and receive personalized legal guidance in minutes. Powered by Google Gemma.</p>
+          <div class="flex flex-wrap gap-md">
+            <button class="px-lg py-md bg-primary text-on-primary font-bold rounded-xl shadow-lg hover:shadow-primary/20 hover:scale-[1.02] transition-all flex items-center gap-xs" onclick="NyaySetu.App.navigate('dashboard')" id="btn-get-started">
+              <span class="material-symbols-outlined">gavel</span>Start Legal Analysis
+            </button>
+            <button class="px-lg py-md border border-primary text-primary font-bold rounded-xl hover:bg-primary/5 transition-all flex items-center gap-xs" onclick="NyaySetu.App.navigate('document')">
+              <span class="material-symbols-outlined">upload_file</span>Upload Legal Document
+            </button>
+            <button class="px-lg py-md text-on-surface-variant font-bold rounded-xl hover:bg-surface-container transition-all flex items-center gap-xs" onclick="NyaySetu.App.navigate('voice')">
+              <span class="material-symbols-outlined">keyboard_voice</span>Voice Consultation
+            </button>
+          </div>
+          <div class="mt-xl flex items-center gap-lg">
+            <div class="flex -space-x-3">
+              <div class="w-10 h-10 rounded-full border-2 border-white bg-primary/10 flex items-center justify-center text-primary text-xs font-bold shadow-sm">A</div>
+              <div class="w-10 h-10 rounded-full border-2 border-white bg-secondary/10 flex items-center justify-center text-secondary text-xs font-bold shadow-sm">B</div>
+              <div class="w-10 h-10 rounded-full border-2 border-white bg-tertiary/10 flex items-center justify-center text-tertiary text-xs font-bold shadow-sm">C</div>
+              <div class="w-10 h-10 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center text-label-sm font-bold text-on-surface-variant">10k+</div>
+            </div>
+            <div class="h-8 w-[1px] bg-outline-variant/30"></div>
+            <p class="text-label-md text-on-surface-variant">Trusted by <span class="font-bold text-on-surface">50,000+ citizens</span> across the nation</p>
+          </div>
+        </div>
+        <div class="lg:col-span-5 relative">
+          <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl border border-white/50 aspect-[4/3] bg-gradient-to-br from-primary/10 via-secondary/5 to-tertiary/5 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[120px] text-primary/20" style="font-variation-settings:'FILL' 1">balance</span>
+          </div>
+          <div class="absolute -bottom-6 -left-6 z-20 glass-effect p-md rounded-2xl shadow-xl border border-primary/10 max-w-[200px]">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center"><span class="material-symbols-outlined text-green-600 text-sm">shield</span></div>
+              <span class="text-label-sm font-bold">Case Secured</span>
+            </div>
+            <p class="text-[10px] text-on-surface-variant">AI has verified your legal documentation for compliance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Features Bento -->
+    <section class="py-xl px-gutter max-w-container-max mx-auto bg-surface-container-low/30">
+      <div class="mb-xl text-center max-w-2xl mx-auto">
+        <h2 class="font-headline-lg text-headline-lg mb-sm">Comprehensive AI Legal Suite</h2>
+        <p class="font-body-md text-on-surface-variant">Experience a new era of legal clarity with features designed for precision, speed, and absolute reliability.</p>
+      </div>
+      <div class="bento-grid">
+        <div class="col-span-12 md:col-span-4 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="NyaySetu.App.navigate('chat')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">translate</span></div>
+          <h3 class="font-headline-md text-xl mb-xs">Multilingual Support</h3>
+          <p class="text-on-surface-variant text-body-md">Access legal help in 12+ regional languages, ensuring justice knows no linguistic barriers.</p>
+        </div>
+        <div class="col-span-12 md:col-span-8 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all flex flex-col md:flex-row gap-lg group cursor-pointer" onclick="NyaySetu.App.navigate('document')">
+          <div class="flex-1">
+            <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">document_scanner</span></div>
+            <h3 class="font-headline-md text-xl mb-xs">Document X-Ray Analysis</h3>
+            <p class="text-on-surface-variant text-body-md">Scan documents and let AI extract, summarize, and identify key legal clauses instantly.</p>
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-4 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="NyaySetu.App.navigate('voice')">
+          <div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">record_voice_over</span></div>
+          <h3 class="font-headline-md text-xl mb-xs">Voice Consultation</h3>
+          <p class="text-on-surface-variant text-body-md">Talk to NyaySetu directly. Perfect for quick queries when typing isn't an option.</p>
+        </div>
+        <div class="col-span-12 md:col-span-4 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="NyaySetu.App.navigate('pathway')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">assignment_turned_in</span></div>
+          <h3 class="font-headline-md text-xl mb-xs">Personalized Action Plan</h3>
+          <p class="text-on-surface-variant text-body-md">Step-by-step roadmap for your situation, including forms, deadlines, and next steps.</p>
+        </div>
+        <div class="col-span-12 md:col-span-4 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all group cursor-pointer" onclick="NyaySetu.App.navigate('rights')">
+          <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">find_in_page</span></div>
+          <h3 class="font-headline-md text-xl mb-xs">Know Your Rights</h3>
+          <p class="text-on-surface-variant text-body-md">Explore your legal rights by category with citations to relevant laws and statutes.</p>
+        </div>
+        <div class="col-span-12 md:col-span-6 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all group bg-gradient-to-br from-primary/5 to-transparent cursor-pointer" onclick="NyaySetu.App.navigate('drafts')">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">edit_note</span></div>
+          <h3 class="font-headline-md text-xl mb-xs">Legal Draft Generator</h3>
+          <p class="text-on-surface-variant text-body-md">Auto-generate complaints, RTI applications, legal notices and more with AI precision.</p>
+        </div>
+        <div class="col-span-12 md:col-span-3 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-error/10 flex items-center justify-center text-error mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">warning</span></div>
+          <h3 class="font-headline-md text-lg mb-xs">Risk Assessment</h3>
+          <p class="text-on-surface-variant text-label-md">Identify potential pitfalls before they become costly problems.</p>
+        </div>
+        <div class="col-span-12 md:col-span-3 glass-effect p-md rounded-2xl border border-primary/10 shadow-sm hover:shadow-md transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-green-600/10 flex items-center justify-center text-green-600 mb-md group-hover:scale-110 transition-transform"><span class="material-symbols-outlined">visibility</span></div>
+          <h3 class="font-headline-md text-lg mb-xs">Explainable AI</h3>
+          <p class="text-on-surface-variant text-label-md">Transparent decisions with citations for every legal claim.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Stats -->
+    <section class="py-lg px-gutter max-w-container-max mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-md text-center">
+        <div class="p-md"><p class="text-headline-lg font-bold text-primary">98.4%</p><p class="text-label-md text-on-surface-variant">Analysis Accuracy</p></div>
+        <div class="p-md"><p class="text-headline-lg font-bold text-primary">2.4M</p><p class="text-label-md text-on-surface-variant">Laws Indexed</p></div>
+        <div class="p-md"><p class="text-headline-lg font-bold text-primary">&lt; 3s</p><p class="text-label-md text-on-surface-variant">Response Time</p></div>
+        <div class="p-md"><p class="text-headline-lg font-bold text-primary">12+</p><p class="text-label-md text-on-surface-variant">Regional Languages</p></div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="mt-xl py-xl bg-primary-container text-on-primary-container">
+      <div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+        <div>
+          <h2 class="font-headline-lg text-headline-lg mb-sm">Ready to simplify your legal journey?</h2>
+          <p class="font-body-md opacity-90">Join thousands of citizens who have found clarity through NyaySetu. Your first analysis is free.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-md justify-end">
+          <button class="px-lg py-md bg-white text-primary font-bold rounded-xl shadow-lg hover:scale-[1.02] transition-all" onclick="NyaySetu.App.navigate('dashboard')">Get Started Free</button>
+          <button class="px-lg py-md border border-white/30 text-white font-bold rounded-xl hover:bg-white/10 transition-all" onclick="NyaySetu.App.navigate('chat')">Ask a Question</button>
+        </div>
+      </div>
+      <div class="max-w-container-max mx-auto px-gutter mt-xl pt-lg border-t border-white/10 flex flex-col md:flex-row justify-between text-label-sm opacity-70 gap-md">
+        <p>&copy; 2024 NyaySetu AI. Empowering justice through technology.</p>
+        <div class="flex gap-lg"><a class="hover:underline" href="#">Privacy</a><a class="hover:underline" href="#">Terms</a><a class="hover:underline" href="#">Disclaimer</a></div>
+      </div>
+    </footer>
+  </main>
+</section>
+
+<!-- ==================== DASHBOARD ==================== -->
+<section id="view-dashboard" class="view">
+  <main class="main-content md:ml-64 p-lg min-h-screen flex flex-col items-center">
+    <section class="w-full max-w-4xl mt-lg animate-fadeIn">
+      <div class="text-center mb-xl">
+        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2" data-i18n="dashboard_title">New Case Analysis</h2>
+        <p class="text-body-md text-on-surface-variant/80" data-i18n="dashboard_subtitle">Describe your situation to begin the AI-driven legal discovery process.</p>
+      </div>
+      <div class="glass-card rounded-[24px] p-1 shadow-xl ring-1 ring-primary/5">
+        <div class="bg-white rounded-[22px] overflow-hidden">
+          <textarea class="w-full h-48 p-md text-body-lg text-on-surface border-none focus:ring-0 resize-none placeholder:text-outline-variant" id="dashboardInput" placeholder="Describe your legal issue in detail... For example: 'My landlord is refusing to return my security deposit after I vacated the property 3 months ago.'"></textarea>
+          <div class="flex items-center justify-between px-md py-sm border-t border-surface-container">
+            <div class="flex items-center gap-xs">
+              <button class="p-2 text-primary hover:bg-primary/5 rounded-lg transition-colors" onclick="NyaySetu.Voice.toggleMic('dashboard')" id="dashMicBtn"><span class="material-symbols-outlined">mic</span></button>
+              <button class="p-2 text-primary hover:bg-primary/5 rounded-lg transition-colors" onclick="NyaySetu.App.navigate('document')"><span class="material-symbols-outlined">upload_file</span></button>
+              <div class="h-6 w-[1px] bg-outline-variant/30 mx-2"></div>
+              <div class="flex items-center gap-2 px-3 py-1 bg-surface-container-low rounded-full text-label-md text-on-surface-variant cursor-pointer hover:bg-surface-container-high transition-colors">
+                <span class="material-symbols-outlined text-[18px]">language</span>
+                <span id="dashLangLabel">English (India)</span>
+                <span class="material-symbols-outlined text-[18px]">expand_more</span>
+              </div>
+            </div>
+            <div class="hidden md:flex items-center text-label-sm text-outline-variant italic">Drag &amp; drop documents here</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center mt-xl">
+        <button class="group relative px-xl py-md rounded-full overflow-hidden shadow-lg transition-all hover:scale-105 active:scale-95" onclick="NyaySetu.App.runAnalysis()">
+          <div class="absolute inset-0 bg-gradient-to-r from-secondary to-primary-container transition-transform group-hover:scale-110"></div>
+          <div class="relative flex items-center gap-3 text-on-primary font-bold text-body-lg">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">auto_awesome</span><span>Analyze Case</span>
+          </div>
+        </button>
+      </div>
+    </section>
+    <section class="w-full max-w-container-max mt-24 grid grid-cols-1 md:grid-cols-3 gap-lg pb-xl">
+      <div class="glass-card p-md rounded-2xl flex flex-col h-64">
+        <div class="flex items-center justify-between mb-sm">
+          <h3 class="font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">history</span>Recent History</h3>
+          <a class="text-label-sm text-secondary hover:underline" href="#">View All</a>
+        </div>
+        <div class="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-1">
+          <div class="p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer border border-primary/5"><p class="text-label-md font-bold text-on-surface truncate">Property Lease Violation</p><p class="text-[12px] text-outline-variant">Analyzed 2h ago</p></div>
+          <div class="p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer border border-primary/5"><p class="text-label-md font-bold text-on-surface truncate">Consumer Rights Dispute</p><p class="text-[12px] text-outline-variant">Analyzed 5h ago</p></div>
+          <div class="p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer border border-primary/5"><p class="text-label-md font-bold text-on-surface truncate">Employment Termination</p><p class="text-[12px] text-outline-variant">Analyzed Yesterday</p></div>
+        </div>
+      </div>
+      <div class="glass-card p-md rounded-2xl flex flex-col h-64 relative overflow-hidden group">
+        <div class="relative z-10">
+          <h3 class="font-bold text-tertiary flex items-center gap-2 mb-sm"><span class="material-symbols-outlined">lightbulb</span>Legal Insight</h3>
+          <p class="text-body-md text-on-surface leading-relaxed">"When drafting service agreements, ensure the <span class="bg-tertiary-fixed px-1 font-bold">Force Majeure</span> clause explicitly mentions regional legislative changes."</p>
+          <div class="flex gap-2 mt-3">
+            <span class="px-3 py-1 bg-tertiary/10 text-tertiary text-[11px] rounded-full font-bold">Contract Law</span>
+            <span class="px-3 py-1 bg-tertiary/10 text-tertiary text-[11px] rounded-full font-bold">Risk Mitigation</span>
+          </div>
+        </div>
+        <div class="absolute -right-12 -bottom-12 w-32 h-32 bg-tertiary/5 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+      </div>
+      <div class="glass-card p-md rounded-2xl flex flex-col h-64 bg-primary-container/5">
+        <h3 class="font-bold text-on-surface-variant flex items-center gap-2 mb-md"><span class="material-symbols-outlined">query_stats</span>Workspace Stats</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="text-center p-3 bg-white/40 rounded-xl border border-white"><p class="text-headline-md font-bold text-primary">12</p><p class="text-[11px] text-outline uppercase font-bold">Active Cases</p></div>
+          <div class="text-center p-3 bg-white/40 rounded-xl border border-white"><p class="text-headline-md font-bold text-secondary">84%</p><p class="text-[11px] text-outline uppercase font-bold">Prec. Match</p></div>
+          <div class="text-center p-3 bg-white/40 rounded-xl border border-white col-span-2"><p class="text-label-md font-bold text-on-surface">System Status: <span class="text-green-600">Optimal</span></p><div class="w-full bg-surface-container-high h-1 rounded-full mt-2 overflow-hidden"><div class="h-full bg-gradient-to-r from-primary to-secondary w-[92%]"></div></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</section>
+
+<!-- ==================== CHAT ==================== -->
+<section id="view-chat" class="view" style="display:none">
+  <main class="main-content md:ml-64 flex flex-col h-screen">
+    <!-- Suggestions -->
+    <div class="px-gutter py-3 border-b border-primary/5 overflow-x-auto flex gap-3 shrink-0 bg-white/50" id="chatSuggestions">
+      <button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/30 text-label-md text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all whitespace-nowrap" onclick="NyaySetu.Chat.sendSuggestion(this)">My landlord is threatening to evict me</button>
+      <button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/30 text-label-md text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all whitespace-nowrap" onclick="NyaySetu.Chat.sendSuggestion(this)">I bought a defective product online</button>
+      <button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/30 text-label-md text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all whitespace-nowrap" onclick="NyaySetu.Chat.sendSuggestion(this)">My employer hasn't paid my salary</button>
+      <button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/30 text-label-md text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all whitespace-nowrap" onclick="NyaySetu.Chat.sendSuggestion(this)">I received a legal notice</button>
+      <button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/30 text-label-md text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all whitespace-nowrap" onclick="NyaySetu.Chat.sendSuggestion(this)">How do I file an RTI?</button>
+    </div>
+    <!-- Messages -->
+    <div class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-6 pb-32" id="chatMessages">
+      <div class="flex gap-4 max-w-3xl animate-fadeIn">
+        <div class="w-9 h-9 rounded-xl bg-primary/10 flex-shrink-0 flex items-center justify-center mt-1"><span class="material-symbols-outlined text-primary text-[20px]">smart_toy</span></div>
+        <div class="glass-card rounded-2xl rounded-tl-none p-5 shadow-sm">
+          <p class="text-on-surface leading-relaxed"><strong>Welcome to NyaySetu!</strong> I'm your AI legal assistant. Tell me about your legal question, and I'll help you understand your rights in simple language.</p>
+          <div class="mt-3 border-t border-primary/5 pt-3"><p class="text-[10px] text-outline uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">shield</span>This is not legal advice. For formal representation, consult a qualified attorney.</p></div>
+        </div>
+      </div>
+    </div>
+    <!-- Input Bar -->
+    <div class="absolute bottom-0 left-0 md:left-64 right-0 p-4 bg-gradient-to-t from-background via-background/90 to-transparent z-40">
+      <div class="max-w-3xl mx-auto">
+        <div class="glass-card rounded-[20px] p-1 shadow-xl ring-1 ring-primary/5">
+          <div class="bg-white rounded-[18px] flex items-center px-4 py-2">
+            <button class="p-2 text-on-surface-variant hover:text-primary hover:bg-primary/5 rounded-lg transition-colors" onclick="NyaySetu.Voice.toggleMic('chat')"><span class="material-symbols-outlined">mic</span></button>
+            <input class="flex-1 border-none focus:ring-0 text-body-md placeholder:text-outline-variant mx-2 bg-transparent" placeholder="Describe your legal question..." type="text" id="chatInput" autocomplete="off" onkeydown="if(event.key==='Enter')NyaySetu.Chat.send()"/>
+            <button class="p-2 bg-primary text-on-primary rounded-xl hover:bg-primary-container transition-colors" onclick="NyaySetu.Chat.send()" id="chatSendBtn"><span class="material-symbols-outlined text-[20px]">arrow_upward</span></button>
+          </div>
+        </div>
+        <p class="text-center text-[11px] text-outline mt-2">NyaySetu AI can make mistakes. Verify important legal information.</p>
+      </div>
+    </div>
+  </main>
+</section>
+
+<!-- ==================== DOCUMENT X-RAY ==================== -->
+<section id="view-document" class="view">
+  <main class="main-content md:ml-64 flex-1 flex flex-col min-w-0 overflow-hidden">
+    <div class="flex-1 overflow-y-auto p-8 lg:p-12">
+      <div class="mb-10"><h2 class="text-3xl font-bold text-on-surface mb-2">Document X-Ray</h2><p class="text-on-surface-variant">Analyze and extract insights from your legal documents with AI precision.</p></div>
+      <div class="upload-zone-dashed flex flex-col items-center justify-center p-16 min-h-[350px] bg-white transition-all cursor-pointer group" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+        <div class="mb-8"><div class="w-20 h-20 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300"><div class="bg-primary rounded-lg p-3 shadow-lg"><span class="material-symbols-outlined text-white text-[32px]">cloud_upload</span></div></div></div>
+        <h3 class="text-2xl font-semibold text-on-surface mb-3">Drop your document here</h3>
+        <p class="text-on-surface-variant text-center max-w-md">or click to browse &mdash; <span class="font-medium text-on-surface">PDF, DOCX, TXT (max 10 MB)</span></p>
+        <input type="file" id="fileInput" class="hidden" accept=".pdf,.docx,.doc,.txt,.md" onchange="NyaySetu.Document.handleFile(this.files[0])">
+      </div>
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex items-center space-x-4 p-4"><div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"><span class="material-symbols-outlined text-green-600">lock</span></div><div><h4 class="font-semibold text-on-surface text-sm">Secure Processing</h4><p class="text-xs text-on-surface-variant">End-to-end encrypted analysis</p></div></div>
+        <div class="flex items-center space-x-4 p-4"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center"><span class="material-symbols-outlined text-blue-600">bolt</span></div><div><h4 class="font-semibold text-on-surface text-sm">Instant Extraction</h4><p class="text-xs text-on-surface-variant">Get key entities in seconds</p></div></div>
+        <div class="flex items-center space-x-4 p-4"><div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"><span class="material-symbols-outlined text-purple-600">gavel</span></div><div><h4 class="font-semibold text-on-surface text-sm">Legal Context</h4><p class="text-xs text-on-surface-variant">Cross-referenced with statutes</p></div></div>
+      </div>
+      <div id="analysisResult"></div>
+    </div>
+  </main>
+</section>
+
+<!-- ==================== DRAFTS ==================== -->
+<section id="view-drafts" class="view">
+  <main class="main-content md:ml-64 p-8 lg:p-12 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-10"><h2 class="text-3xl font-bold text-on-surface mb-2">Legal Draft Generator</h2><p class="text-on-surface-variant">Select the type of document you need and describe your situation.</p></div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="draftTypes">
+        <button class="glass-card p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:shadow-md group" data-type="consumer_complaint" onclick="NyaySetu.Drafts.selectType(this)"><span class="material-symbols-outlined text-[32px] text-primary group-hover:scale-110 transition-transform">shopping_cart</span><span class="font-medium text-on-surface text-sm">Consumer Complaint</span></button>
+        <button class="glass-card p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:shadow-md group" data-type="rti_application" onclick="NyaySetu.Drafts.selectType(this)"><span class="material-symbols-outlined text-[32px] text-secondary group-hover:scale-110 transition-transform">assignment</span><span class="font-medium text-on-surface text-sm">RTI Application</span></button>
+        <button class="glass-card p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:shadow-md group" data-type="legal_notice" onclick="NyaySetu.Drafts.selectType(this)"><span class="material-symbols-outlined text-[32px] text-tertiary group-hover:scale-110 transition-transform">description</span><span class="font-medium text-on-surface text-sm">Legal Notice</span></button>
+        <button class="glass-card p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:shadow-md group" data-type="police_complaint" onclick="NyaySetu.Drafts.selectType(this)"><span class="material-symbols-outlined text-[32px] text-error group-hover:scale-110 transition-transform">local_police</span><span class="font-medium text-on-surface text-sm">Police Complaint</span></button>
+        <button class="glass-card p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:shadow-md group" data-type="workplace_complaint" onclick="NyaySetu.Drafts.selectType(this)"><span class="material-symbols-outlined text-[32px] text-primary group-hover:scale-110 transition-transform">corporate_fare</span><span class="font-medium text-on-surface text-sm">Workplace Complaint</span></button>
+        <button class="glass-card p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:shadow-md group" data-type="tenant_notice" onclick="NyaySetu.Drafts.selectType(this)"><span class="material-symbols-outlined text-[32px] text-secondary group-hover:scale-110 transition-transform">home</span><span class="font-medium text-on-surface text-sm">Tenant Notice</span></button>
+      </div>
+      <div class="hidden" id="draftForm">
+        <label class="block text-label-md font-bold text-on-surface-variant mb-2 uppercase tracking-wider">Describe your situation in detail:</label>
+        <textarea class="w-full h-32 p-md rounded-xl bg-white border border-outline-variant/30 text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary/20 focus:border-primary/30 resize-none" id="draftDetails" placeholder="Example: My landlord has not returned my security deposit of Rs.50,000 even after 3 months..."></textarea>
+        <button class="w-full mt-4 px-6 py-3.5 rounded-xl bg-primary text-on-primary font-bold hover:bg-primary-container transition-all shadow-lg" onclick="NyaySetu.Drafts.generate()" id="btn-generate-draft"><span class="material-symbols-outlined align-middle mr-1">edit_note</span>Generate Draft</button>
+      </div>
+      <div id="draftOutput"></div>
+    </div>
+  </main>
+</section>
+
+<!-- ==================== PATHWAY ==================== -->
+<section id="view-pathway" class="view">
+  <main class="main-content md:ml-64 p-8 lg:p-12 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-10"><h2 class="text-3xl font-bold text-on-surface mb-2">Legal Pathway Planner</h2><p class="text-on-surface-variant">Describe your situation and get a step-by-step action plan with timelines and costs.</p></div>
+      <textarea class="w-full h-32 p-md rounded-xl bg-white border border-outline-variant/30 text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary/20 resize-none" id="pathwayInput" placeholder="Example: My employer fired me without notice after 5 years. They haven't given me my dues or experience letter."></textarea>
+      <button class="w-full mt-4 px-6 py-3.5 rounded-xl bg-primary text-on-primary font-bold hover:bg-primary-container transition-all shadow-lg" onclick="NyaySetu.Pathway.generate()" id="btn-gen-path"><span class="material-symbols-outlined align-middle mr-1">assignment_turned_in</span>Generate Action Plan</button>
+      <div id="pathwayResult"></div>
+    </div>
+  </main>
+</section>
+
+<!-- ==================== WORKFLOW ORCHESTRATION ==================== -->
+<section id="view-workflow" class="view" style="display:none">
+  <main class="main-content md:ml-64 p-8 lg:p-12 min-h-screen">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-8 animate-fadeIn">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-label-sm font-bold mb-4">
+          <span class="material-symbols-outlined text-[16px] agent-pulse">psychology</span>ANALYSIS ENGINE RUNNING
+        </div>
+        <h2 class="text-3xl font-bold text-on-surface mb-2">Legal Agent Workflow Orchestration</h2>
+        <p class="text-on-surface-variant">NyaySetu is running 8 specialized legal agents sequentially to analyze your case.</p>
+      </div>
+      <div class="space-y-4" id="workflowAgents"></div>
+      <div class="hidden" id="workflowActions"></div>
+    </div>
+  </main>
+</section>
+
+<!-- ==================== VOICE ==================== -->
+<section id="view-voice" class="view" style="display:none">
+  <div class="fixed inset-0 z-[70] bg-slate-900">
+    <main class="relative z-10 flex flex-col h-screen w-full items-center justify-between py-xl px-gutter glass-dark">
+      <header class="flex flex-col items-center gap-xs">
+        <h1 class="font-headline-md text-headline-md text-white tracking-tight">NyaySetu</h1>
+        <p class="font-label-md text-label-md text-primary-fixed/60 uppercase tracking-widest" id="voiceStatus">Precise Advocate AI</p>
+      </header>
+      <section class="flex flex-col items-center justify-center w-full max-w-md">
+        <div class="mb-lg flex flex-col items-center gap-xs">
+          <span class="flex items-center gap-2 px-md py-1 rounded-full bg-primary/20 border border-primary/30 text-primary-fixed">
+            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            <span class="font-label-md text-label-md">Tap to start</span>
+          </span>
+        </div>
+        <button class="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-white glow-pulse shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all" id="voiceMicCircle" onclick="NyaySetu.Voice.toggleMic('voice')">
+          <span class="material-symbols-outlined text-[40px]" style="font-variation-settings:'FILL' 1">mic</span>
+        </button>
+      </section>
+      <section class="w-full max-w-2xl flex flex-col items-center gap-xl">
+        <div class="w-full text-center space-y-3 min-h-[100px]">
+          <div class="hidden glass-card rounded-2xl p-4 text-left border-primary/20" id="voiceTranscript" style="background:rgba(255,255,255,0.05)"><p class="text-label-sm text-white/40 uppercase tracking-wider mb-1">You said:</p><p class="text-white/80" id="voiceTranscriptText"></p></div>
+          <div class="hidden glass-card rounded-2xl p-4 text-left border-l-4 border-primary" id="voiceResponse" style="background:rgba(255,255,255,0.05)"><p class="text-label-sm text-primary-fixed/60 uppercase tracking-wider mb-1">NyaySetu:</p><p class="text-white" id="voiceResponseText"></p></div>
+        </div>
+        <div class="flex items-center gap-lg">
+          <button class="group flex flex-col items-center gap-2 transition-all hover:scale-105 active:scale-95" onclick="NyaySetu.App.navigate('dashboard')">
+            <div class="w-14 h-14 rounded-full border border-error/20 bg-error/5 flex items-center justify-center text-error/70 group-hover:bg-error/10 group-hover:text-error transition-colors"><span class="material-symbols-outlined text-[28px]">close</span></div>
+            <span class="font-label-sm text-label-sm text-white/40 group-hover:text-white/60">Exit</span>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+</section>
+
+<!-- ==================== RIGHTS ==================== -->
+<section id="view-rights" class="view">
+  <main class="main-content md:ml-64 p-8 lg:p-12 min-h-screen">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-10 text-center"><h2 class="text-3xl font-bold text-on-surface mb-2">Know Your Rights</h2><p class="text-on-surface-variant max-w-2xl mx-auto">Select a category to explore your legal rights. Knowledge is your first line of defense.</p></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="rightsCategories">
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="tenant" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-primary group-hover:scale-110 transition-transform">home</span><span class="font-medium text-on-surface text-sm">Tenant Rights</span></button>
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="consumer" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-secondary group-hover:scale-110 transition-transform">shopping_cart</span><span class="font-medium text-on-surface text-sm">Consumer Rights</span></button>
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="worker" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-tertiary group-hover:scale-110 transition-transform">engineering</span><span class="font-medium text-on-surface text-sm">Worker Rights</span></button>
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="women" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-error group-hover:scale-110 transition-transform">diversity_3</span><span class="font-medium text-on-surface text-sm">Women's Rights</span></button>
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="digital" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-primary group-hover:scale-110 transition-transform">computer</span><span class="font-medium text-on-surface text-sm">Digital Rights</span></button>
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="property" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-secondary group-hover:scale-110 transition-transform">real_estate_agent</span><span class="font-medium text-on-surface text-sm">Property Rights</span></button>
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="criminal" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-tertiary group-hover:scale-110 transition-transform">gavel</span><span class="font-medium text-on-surface text-sm">Criminal Rights</span></button>
+        <button class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center gap-3 transition-all hover:shadow-md group" data-cat="family" onclick="NyaySetu.Rights.selectCategory(this)"><span class="material-symbols-outlined text-[32px] text-primary group-hover:scale-110 transition-transform">family_restroom</span><span class="font-medium text-on-surface text-sm">Family Law</span></button>
+      </div>
+      <div id="rightsResult" class="mt-8"></div>
+    </div>
+  </main>
+</section>
+
+<!-- JS -->
+<script src="/static/js/i18n.js"></script>
+<script src="/static/js/api.js"></script>
+<script src="/static/js/chat.js"></script>
+<script src="/static/js/document.js"></script>
+<script src="/static/js/drafts.js"></script>
+<script src="/static/js/pathway.js"></script>
+<script src="/static/js/voice.js"></script>
+<script src="/static/js/rights.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

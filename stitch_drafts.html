@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NyaySetu - Legal Draft Generator</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Tailwind Config -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'nyay-blue': '#4F46E5',
+            'nyay-bg': '#F8FAFC',
+            'nyay-sidebar-active': '#E0E7FF',
+          },
+          backdropBlur: {
+            'xs': '2px',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles -->
+<style data-purpose="custom-glassmorphism">
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    }
+    .active-nav-item {
+      background-color: #EBF2FF;
+      color: #3b82f6;
+      border-radius: 0 50px 50px 0;
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 h-screen overflow-hidden flex">
+<!-- BEGIN: SideNavBar -->
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full shrink-0" data-purpose="navigation-sidebar">
+<!-- Brand Logo Section -->
+<div class="p-6 flex items-center space-x-3">
+<div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">N</div>
+<div>
+<h1 class="font-bold text-slate-900 leading-tight">NyaySetu</h1>
+<p class="text-xs text-slate-500">Precise Advocate AI</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex-1 px-4 space-y-1 mt-4">
+<a class="flex items-center space-x-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="text-lg">🏠</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="text-lg">🧭</span>
+<span class="text-sm font-medium">Case Compass</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="text-lg">💬</span>
+<span class="text-sm font-medium">Chat</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="text-lg">📄</span>
+<span class="text-sm font-medium">Document X-Ray</span>
+</a>
+<!-- Active Item: Drafts -->
+<a class="flex items-center space-x-3 p-3 active-nav-item text-blue-600 font-semibold" href="#">
+<span class="text-lg">✍️</span>
+<span class="text-sm">Drafts</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="text-lg">🗺️</span>
+<span class="text-sm font-medium">Pathway</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="text-lg">🎤</span>
+<span class="text-sm font-medium">Voice</span>
+</a>
+<a class="flex items-center space-x-3 p-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors" href="#">
+<span class="text-lg">📚</span>
+<span class="text-sm font-medium">Rights</span>
+</a>
+</nav>
+<!-- Bottom Promo/Info Card -->
+<div class="p-4 mb-4">
+<div class="bg-indigo-50/50 p-4 rounded-2xl border border-indigo-100">
+<h4 class="font-bold text-slate-900 text-sm mb-1">Gemma 4 powered</h4>
+<p class="text-xs text-slate-500 leading-relaxed">
+          Multilingual reasoning + document analysis + action plans.
+        </p>
+</div>
+</div>
+</aside>
+<!-- END: SideNavBar -->
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- BEGIN: TopNavBar -->
+<header class="h-16 bg-white/80 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0" data-purpose="top-header">
+<!-- Search Bar -->
+<div class="flex-1 max-w-2xl relative">
+<span class="absolute inset-y-0 left-4 flex items-center text-slate-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="w-full pl-11 pr-4 py-2.5 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 transition-all" placeholder="Search laws, case types, or prompts" type="text"/>
+</div>
+<!-- User Controls -->
+<div class="flex items-center space-x-6 ml-4">
+<div class="flex items-center space-x-2 border border-slate-200 rounded-lg px-3 py-1.5 cursor-pointer hover:bg-slate-50 transition-colors">
+<span class="text-sm text-slate-600">🌐 English</span>
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<button class="text-xl">🏠</button>
+</div>
+</header>
+<!-- END: TopNavBar -->
+<!-- BEGIN: Main Dashboard Content -->
+<main class="flex-1 overflow-y-auto p-8 relative">
+<!-- Decorative Background Gradient (Visual flavor from image) -->
+<div class="absolute top-0 right-0 w-1/2 h-64 bg-gradient-to-bl from-blue-50 to-transparent -z-10 opacity-70"></div>
+<!-- Header Section -->
+<div class="mb-10 max-w-4xl" data-purpose="content-header">
+<h2 class="text-2xl font-bold text-slate-900 flex items-center">
+<span class="mr-3">✍️</span> Legal Draft Generator
+        </h2>
+<p class="text-slate-500 mt-2 text-lg">
+          Select the type of document you need and describe your situation. Our AI will generate a professional draft.
+        </p>
+</div>
+<!-- BEGIN: Draft Cards Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6" data-purpose="document-selection-grid">
+<!-- Card 1: Consumer Complaint -->
+<button class="glass-card flex flex-col items-center justify-center p-8 rounded-[2rem] transition-all hover:scale-105 group">
+<div class="w-16 h-16 mb-4 flex items-center justify-center text-4xl grayscale group-hover:grayscale-0 transition-all">🛒</div>
+<span class="text-center font-bold text-slate-800 text-sm leading-tight">Consumer<br/>Complaint</span>
+</button>
+<!-- Card 2: RTI Application -->
+<button class="glass-card flex flex-col items-center justify-center p-8 rounded-[2rem] transition-all hover:scale-105 group">
+<div class="w-16 h-16 mb-4 flex items-center justify-center text-4xl grayscale group-hover:grayscale-0 transition-all">📋</div>
+<span class="text-center font-bold text-slate-800 text-sm leading-tight">RTI Application</span>
+</button>
+<!-- Card 3: Legal Notice -->
+<button class="glass-card flex flex-col items-center justify-center p-8 rounded-[2rem] transition-all hover:scale-105 group">
+<div class="w-16 h-16 mb-4 flex items-center justify-center text-4xl grayscale group-hover:grayscale-0 transition-all">📜</div>
+<span class="text-center font-bold text-slate-800 text-sm leading-tight">Legal Notice</span>
+</button>
+<!-- Card 4: Police Complaint -->
+<button class="glass-card flex flex-col items-center justify-center p-8 rounded-[2rem] transition-all hover:scale-105 group">
+<div class="w-16 h-16 mb-4 flex items-center justify-center text-4xl grayscale group-hover:grayscale-0 transition-all">🚔</div>
+<span class="text-center font-bold text-slate-800 text-sm leading-tight">Police Complaint</span>
+</button>
+<!-- Card 5: Workplace Complaint -->
+<button class="glass-card flex flex-col items-center justify-center p-8 rounded-[2rem] transition-all hover:scale-105 group">
+<div class="w-16 h-16 mb-4 flex items-center justify-center text-4xl grayscale group-hover:grayscale-0 transition-all">🏢</div>
+<span class="text-center font-bold text-slate-800 text-sm leading-tight">Workplace<br/>Complaint</span>
+</button>
+<!-- Card 6: Tenant Notice -->
+<button class="glass-card flex flex-col items-center justify-center p-8 rounded-[2rem] transition-all hover:scale-105 group">
+<div class="w-16 h-16 mb-4 flex items-center justify-center text-4xl grayscale group-hover:grayscale-0 transition-all">🏠</div>
+<span class="text-center font-bold text-slate-800 text-sm leading-tight">Tenant Notice</span>
+</button>
+</div>
+<!-- END: Draft Cards Grid -->
+</main>
+<!-- END: Main Dashboard Content -->
+</div>
+</body></html>

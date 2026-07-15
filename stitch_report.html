@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NyaySetu | Case Analysis Report</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-fixed": "#e2dfff",
+                "outline-variant": "#c3c6d7",
+                "surface-container-high": "#e7e8e9",
+                "primary-fixed": "#dbe1ff",
+                "tertiary-container": "#bc4800",
+                "inverse-primary": "#b4c5ff",
+                "on-primary-fixed-variant": "#003ea8",
+                "surface-tint": "#0053db",
+                "primary-container": "#2563eb",
+                "on-primary": "#ffffff",
+                "surface-variant": "#e1e3e4",
+                "inverse-surface": "#2e3132",
+                "primary-fixed-dim": "#b4c5ff",
+                "on-tertiary-container": "#ffede6",
+                "surface-container-low": "#f3f4f5",
+                "tertiary-fixed-dim": "#ffb596",
+                "on-secondary-fixed": "#0f0069",
+                "on-error-container": "#93000a",
+                "on-primary-fixed": "#00174b",
+                "on-tertiary-fixed-variant": "#7d2d00",
+                "surface-container-highest": "#e1e3e4",
+                "on-tertiary": "#ffffff",
+                "background": "#f8f9fa",
+                "surface-container": "#edeeef",
+                "on-surface": "#191c1d",
+                "on-surface-variant": "#434655",
+                "surface": "#f8f9fa",
+                "inverse-on-surface": "#f0f1f2",
+                "tertiary": "#943700",
+                "outline": "#737686",
+                "on-primary-container": "#eeefff",
+                "surface-bright": "#f8f9fa",
+                "secondary": "#4b41e1",
+                "on-secondary-container": "#fffbff",
+                "on-tertiary-fixed": "#360f00",
+                "error": "#ba1a1a",
+                "error-container": "#ffdad6",
+                "on-background": "#191c1d",
+                "surface-container-lowest": "#ffffff",
+                "secondary-fixed-dim": "#c3c0ff",
+                "surface-dim": "#d9dadb",
+                "secondary-container": "#645efb",
+                "on-error": "#ffffff",
+                "on-secondary-fixed-variant": "#3323cc",
+                "tertiary-fixed": "#ffdbcd",
+                "on-secondary": "#ffffff",
+                "primary": "#004ac6"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "md": "1.5rem",
+                "xs": "0.5rem",
+                "gutter": "24px",
+                "xl": "3rem",
+                "lg": "2rem",
+                "sm": "1rem",
+                "base": "4px",
+                "container-max": "1280px"
+            },
+            "fontFamily": {
+                "body-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "label-md": ["Inter"],
+                "headline-md": ["Inter"],
+                "headline-xl": ["Inter"],
+                "headline-lg": ["Inter"],
+                "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 74, 198, 0.1);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #f1f5f9 0%, #f8fafc 50%, #f1f5f9 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .radial-progress {
+            --value: 75;
+            --size: 120px;
+            --thickness: 10px;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            background: radial-gradient(closest-side, white 79%, transparent 80% 100%), conic-gradient(var(--primary-color) calc(var(--value) * 1%), #e2e8f0 0);
+        }
+        .sidebar-active {
+            color: #004ac6;
+            font-weight: 700;
+            border-right: 2px solid #004ac6;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+<!-- Sidebar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-white/70 dark:bg-surface-container/70 backdrop-blur-md border-r border-primary/10 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.04)] flex flex-col py-md px-sm z-50">
+<div class="mb-xl px-xs">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">NyaySetu</h1>
+<p class="text-on-surface-variant/70 text-xs font-medium tracking-tight">Precise Advocate AI</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-xs px-xs py-sm text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-xs px-xs py-sm text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-md text-label-md">New Analysis</span>
+</a>
+<a class="flex items-center gap-xs px-xs py-sm text-primary font-bold border-r-2 border-primary hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+<a class="flex items-center gap-xs px-xs py-sm text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-xs px-xs py-sm text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-xs px-xs py-sm text-on-surface-variant/70 font-medium hover:bg-primary/5 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</nav>
+<div class="mt-auto p-xs">
+<button class="w-full bg-primary-container text-on-primary py-sm rounded-lg font-label-md text-label-md hover:opacity-90 transition-all shadow-sm">
+                Upgrade to Pro
+            </button>
+</div>
+</aside>
+<!-- Top Bar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-gutter h-16 ml-64 max-w-[calc(100%-16rem)] bg-white/70 backdrop-blur-md sticky top-0 z-40 border-b border-primary/10 shadow-sm">
+<div class="flex items-center gap-sm flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search case law, documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-opacity relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-opacity">
+<span class="material-symbols-outlined">language</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a legal consultant in a well-lit modern office setting, wearing professional attire. The lighting is bright and crisp, reflecting a high-end corporate aesthetic with soft bokeh in the background. The mood is trustworthy and authoritative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyBeLeg9tUWDM8LpXmdy3ARhM9XiA3WxvgJGhyc0REvnTmRImcz9akzaAkAw9teCxUNaGtGhb7MlzlAgpOOi9uBFa3vc1JG5z6zIirtICpkfFHRAyGhfgnuEdMzKhDKRHjO8HFMQRX8opLmJrHe2ichEety-DrFEFipyQvZ9WbtG2Cd-GqPOTCAU4Aj_cjjQ6ibE7U6HbppqgN1EOLa4C4TTh1hAEoN_c6n9frstXJ43F4e0CdqTx5Xg"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 p-gutter max-w-container-max mx-auto">
+<!-- Report Header Section -->
+<section class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<nav class="flex items-center gap-xs text-outline text-xs mb-xs">
+<span>History</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span>Reports</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary font-semibold">NS-2024-8842</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-primary-container">Legal Analysis Report</h2>
+<p class="text-on-surface-variant">Generated on October 24, 2024 • ID: 8842-XJ</p>
+</div>
+<div class="flex flex-wrap gap-xs">
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest text-primary border border-primary/20 rounded-lg hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="font-label-md">Download PDF</span>
+</button>
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest text-on-surface-variant border border-outline-variant rounded-lg hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span class="font-label-md">Share with Counsel</span>
+</button>
+<button class="flex items-center gap-xs px-md py-sm bg-primary text-on-primary rounded-lg hover:bg-primary-container transition-all shadow-md">
+<span class="material-symbols-outlined text-[20px]">record_voice_over</span>
+<span class="font-label-md">Voice Follow-up</span>
+</button>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Case Summary (Main Focus) -->
+<div class="col-span-12 lg:col-span-8 glass-card rounded-xl p-md">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary">subject</span>
+<h3 class="font-headline-md text-headline-md">Case Summary</h3>
+</div>
+<div class="space-y-sm text-on-surface-variant font-body-md">
+<p>The client is facing a potential intellectual property dispute regarding algorithmic trading software developed during their previous employment at a fintech firm. The primary contention lies in the ownership of "derivative logic" created after the termination of the non-compete period but allegedly utilizing "foundational trade secrets" acquired during tenure.</p>
+<p>The opposing party has issued a Cease and Desist, citing the Trade Secrets Protection Act and specific clauses in the original Employment Agreement. However, preliminary analysis suggests significant precedent in <i>Advanta v. TechCorp (2022)</i> regarding the definition of 'independent innovation' versus 'derivative works'.</p>
+</div>
+</div>
+<!-- Risk & Confidence (Side Indicators) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Risk Assessment -->
+<div class="glass-card rounded-xl p-md flex flex-col items-center justify-center text-center">
+<h3 class="font-label-md text-label-md uppercase tracking-wider text-outline mb-md">Risk Assessment</h3>
+<div class="relative mb-sm">
+<!-- Custom Gauge -->
+<div class="radial-progress" style="--value: 42; --primary-color: #ba1a1a;"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-md text-error">42%</span>
+<span class="text-[10px] text-outline font-bold">MODERATE</span>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant">Probability of litigation escalation based on current filings.</p>
+</div>
+<!-- Confidence Meter -->
+<div class="glass-card rounded-xl p-md">
+<div class="flex justify-between items-center mb-xs">
+<h3 class="font-label-md text-label-md text-outline">AI Confidence Meter</h3>
+<span class="text-primary font-bold">98.4%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[98.4%] rounded-full"></div>
+</div>
+<p class="text-[10px] mt-xs text-on-surface-variant italic">Based on 14,200 indexed court cases and 24 relevant statutes.</p>
+</div>
+</div>
+<!-- Detailed Legal Analysis -->
+<div class="col-span-12 lg:col-span-8 glass-card rounded-xl p-md">
+<div class="flex items-center justify-between mb-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<h3 class="font-headline-md text-headline-md">Detailed Legal Analysis</h3>
+</div>
+<span class="bg-secondary/10 text-secondary px-sm py-1 rounded-full text-xs font-bold">Advanced AI Model v4.2</span>
+</div>
+<div class="space-y-lg">
+<div>
+<h4 class="font-bold text-primary-container text-body-lg mb-xs">I. Ownership of Intellectual Assets</h4>
+<p class="text-on-surface-variant">The employment contract dated Jan 2020 includes a standard IP assignment clause. However, Section 4.2 specifically excludes 'Independent Creations' developed without company resources. Analysis of git repositories suggests 92% of the logic was committed post-employment.</p>
+</div>
+<div class="p-sm bg-surface-container-low rounded-lg border-l-4 border-primary">
+<h4 class="font-bold text-on-surface text-sm mb-xs">Strategic Note</h4>
+<p class="text-on-surface-variant text-sm">Focus on the 'Clean Room' development methodology employed. If documented correctly, this serves as a complete defense against trade secret misappropriation.</p>
+</div>
+<div>
+<h4 class="font-bold text-primary-container text-body-lg mb-xs">II. Trade Secret Validity</h4>
+<p class="text-on-surface-variant">The mathematical principles behind the algorithm are largely based on open-source Quantitative Finance libraries. Under the Public Domain Doctrine, generic mathematical optimizations cannot be claimed as proprietary secrets.</p>
+</div>
+</div>
+</div>
+<!-- Recommended Actions & Laws -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Applicable Laws -->
+<div class="glass-card rounded-xl p-md">
+<h3 class="font-label-md text-label-md text-primary mb-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+                        Applicable Laws
+                    </h3>
+<ul class="space-y-sm">
+<li class="flex items-start gap-xs group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary text-[16px] mt-1">link</span>
+<div>
+<a class="text-sm font-semibold text-on-surface hover:text-primary underline decoration-primary/20" href="#">The Indian Copyright Act, 1957</a>
+<p class="text-[11px] text-outline">Section 13: Works in which copyright subsists.</p>
+</div>
+</li>
+<li class="flex items-start gap-xs group">
+<span class="material-symbols-outlined text-outline group-hover:text-primary text-[16px] mt-1">link</span>
+<div>
+<a class="text-sm font-semibold text-on-surface hover:text-primary underline decoration-primary/20" href="#">Indian Contract Act, 1872</a>
+<p class="text-[11px] text-outline">Section 27: Agreement in restraint of trade.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Estimated Cost/Timeline -->
+<div class="glass-card rounded-xl p-md bg-primary-container/5">
+<h3 class="font-label-md text-label-md text-primary mb-sm">Estimated Timeline &amp; Cost</h3>
+<div class="flex items-center justify-between mb-sm">
+<span class="text-xs text-on-surface-variant">Litigation Period</span>
+<span class="font-bold text-on-surface">6-8 Months</span>
+</div>
+<div class="flex items-center justify-between mb-md">
+<span class="text-xs text-on-surface-variant">Est. Legal Fees</span>
+<span class="font-bold text-on-surface">₹4.5L - ₹7.2L</span>
+</div>
+<div class="h-1 bg-primary/10 rounded-full">
+<div class="h-full w-2/3 bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Recommended Actions (Numbered) -->
+<div class="col-span-12 lg:col-span-6 glass-card rounded-xl p-md">
+<div class="flex items-center gap-xs mb-md">
+<span class="material-symbols-outlined text-primary">playlist_add_check</span>
+<h3 class="font-headline-md text-headline-md">Recommended Actions</h3>
+</div>
+<div class="space-y-md">
+<div class="flex gap-md">
+<span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-sm">01</span>
+<div>
+<p class="font-bold text-on-surface">Issue Formal Response</p>
+<p class="text-sm text-on-surface-variant">Engage counsel to draft a response challenging the validity of the trade secret claims.</p>
+</div>
+</div>
+<div class="flex gap-md">
+<span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-sm">02</span>
+<div>
+<p class="font-bold text-on-surface">Audit Codebase History</p>
+<p class="text-sm text-on-surface-variant">Prepare a timeline of commits to prove development occurred post-employment.</p>
+</div>
+</div>
+<div class="flex gap-md">
+<span class="flex-shrink-0 w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-sm">03</span>
+<div>
+<p class="font-bold text-on-surface">Pre-emptive Mediation</p>
+<p class="text-sm text-on-surface-variant">Propose a settlement involving a limited royalty for the 'foundational' elements.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Required Documents & Authorities -->
+<div class="col-span-12 lg:col-span-6 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Required Documents -->
+<div class="glass-card rounded-xl p-md">
+<h3 class="font-label-md text-label-md text-outline mb-sm uppercase tracking-tight">Required Documents</h3>
+<div class="space-y-xs">
+<div class="flex items-center gap-xs p-xs bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-medium">Original Contract</span>
+</div>
+<div class="flex items-center gap-xs p-xs bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-outline text-[18px]">radio_button_unchecked</span>
+<span class="text-xs font-medium text-on-surface-variant">Resignation Letter</span>
+</div>
+<div class="flex items-center gap-xs p-xs bg-surface-container-low rounded-lg">
+<span class="material-symbols-outlined text-outline text-[18px]">radio_button_unchecked</span>
+<span class="text-xs font-medium text-on-surface-variant">Git Log Export</span>
+</div>
+</div>
+</div>
+<!-- Authorities to Contact -->
+<div class="glass-card rounded-xl p-md">
+<h3 class="font-label-md text-label-md text-outline mb-sm uppercase tracking-tight">Key Authorities</h3>
+<div class="space-y-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[20px]">account_balance</span>
+</div>
+<div>
+<p class="text-xs font-bold">Delhi High Court</p>
+<p class="text-[10px] text-outline">Intellectual Property Div.</p>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[20px]">shield_person</span>
+</div>
+<div>
+<p class="text-xs font-bold">IPR Cell</p>
+<p class="text-[10px] text-outline">Cyber Crime Division</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Disclaimer -->
+<footer class="mt-xl pt-lg border-t border-outline-variant/30 text-center max-w-3xl mx-auto">
+<div class="inline-flex items-center gap-xs text-error mb-xs">
+<span class="material-symbols-outlined text-[18px]">report_problem</span>
+<span class="font-bold text-xs uppercase tracking-widest">Important Disclaimer</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                NyaySetu is an AI-driven legal assistant. This report is for informational purposes only and does not constitute legal advice. While our algorithms achieve high precision, legal outcomes are subject to judicial discretion. We strongly recommend consulting with a licensed legal practitioner before taking any formal action.
+            </p>
+<p class="text-[10px] text-outline mt-md">© 2024 NyaySetu AI. All rights reserved. Data encrypted with AES-256 standard.</p>
+</footer>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 100);
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

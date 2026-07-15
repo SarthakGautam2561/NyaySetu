@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Know Your Rights | NyaySetu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {},
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Sora", "sans-serif"],
+                        display: ["Sora", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                        label: ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0a0e1a; color: #f1f5f9; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-panel-hover:hover {
+            background: rgba(31, 41, 55, 0.8);
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-indigo-500/30 min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-900/50 backdrop-blur-md border-b border-white/10 shadow-xl transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-7xl mx-auto">
+<div class="font-headline text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-violet-500">NyaySetu</div>
+<nav class="hidden md:flex gap-8 font-body text-slate-200">
+<a class="text-slate-400 hover:text-slate-100 transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#">Dashboard</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#">Document X-Ray</a>
+<a class="text-indigo-400 border-b-2 border-indigo-500 pb-1" href="#">My Documents</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors hover:bg-white/5 px-3 py-2 rounded-md" href="#">Support</a>
+</nav>
+<button class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-label text-sm tracking-wide px-6 py-2.5 rounded-full shadow-lg shadow-indigo-500/20 transition-all duration-300">
+                Consult AI
+            </button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 px-6 md:px-12 w-full max-w-[1000px] mx-auto flex flex-col gap-12">
+<!-- Page Header -->
+<header class="text-center space-y-4">
+<h1 class="font-display text-4xl md:text-5xl font-extrabold text-slate-100">
+                📚 Know Your Rights
+            </h1>
+<p class="font-body text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                Select a category to explore your legal rights. Knowledge is your first line of defense.
+            </p>
+</header>
+<!-- Category Grid -->
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Active Card -->
+<button class="glass-panel rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 border-indigo-500/50 bg-indigo-900/10 shadow-[0_0_15px_rgba(99,102,241,0.15)] ring-1 ring-indigo-500 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">🏠</span>
+<span class="font-headline font-semibold text-indigo-300 text-sm md:text-base">Tenant Rights</span>
+</button>
+<!-- Inactive Cards -->
+<button class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">🛒</span>
+<span class="font-headline font-semibold text-slate-300 text-sm md:text-base">Consumer Rights</span>
+</button>
+<button class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">👷</span>
+<span class="font-headline font-semibold text-slate-300 text-sm md:text-base">Worker Rights</span>
+</button>
+<button class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">👩</span>
+<span class="font-headline font-semibold text-slate-300 text-sm md:text-base">Women's Rights</span>
+</button>
+<button class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">💻</span>
+<span class="font-headline font-semibold text-slate-300 text-sm md:text-base">Digital Rights</span>
+</button>
+<button class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">🏗️</span>
+<span class="font-headline font-semibold text-slate-300 text-sm md:text-base">Property Rights</span>
+</button>
+<button class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">⚖️</span>
+<span class="font-headline font-semibold text-slate-300 text-sm md:text-base">Criminal Rights</span>
+</button>
+<button class="glass-panel glass-panel-hover rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300 group">
+<span class="text-3xl group-hover:scale-110 transition-transform">👨‍👩‍👧</span>
+<span class="font-headline font-semibold text-slate-300 text-sm md:text-base">Family Law</span>
+</button>
+</section>
+<!-- Results Section (Tenant Rights focus) -->
+<section class="space-y-6">
+<div class="flex items-center gap-4 border-b border-white/5 pb-4">
+<h2 class="font-display text-2xl font-bold text-slate-100 flex items-center gap-3">
+<span class="text-indigo-400">🏠</span> Tenant Rights Overview
+                </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Right Card 1 -->
+<div class="glass-panel rounded-xl p-6 space-y-4 hover:border-indigo-500/30 transition-colors">
+<h3 class="font-headline text-xl font-semibold text-slate-200 flex items-center gap-2">
+                        🛡️ Right to Fair Rent
+                    </h3>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-label text-xs tracking-wide">
+<span class="material-symbols-outlined text-sm">gavel</span>
+                        📜 Rent Control Act, Section 4
+                    </div>
+<p class="font-body text-slate-400 text-sm leading-relaxed">
+                        Landlords cannot charge rent exceeding the 'standard rent' fixed by the Rent Control Court. You have the right to petition for rent fixation if you believe it is excessive.
+                    </p>
+<div class="bg-emerald-900/20 border border-emerald-500/20 rounded-lg p-3 text-emerald-300 text-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-lg mt-0.5">lightbulb</span>
+<span><strong>Tip:</strong> Always request rent receipts as proof of payment.</span>
+</div>
+</div>
+<!-- Right Card 2 -->
+<div class="glass-panel rounded-xl p-6 space-y-4 hover:border-indigo-500/30 transition-colors">
+<h3 class="font-headline text-xl font-semibold text-slate-200 flex items-center gap-2">
+                        🚫 Protection from Eviction
+                    </h3>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-label text-xs tracking-wide">
+<span class="material-symbols-outlined text-sm">gavel</span>
+                        📜 Transfer of Property Act
+                    </div>
+<p class="font-body text-slate-400 text-sm leading-relaxed">
+                        You cannot be forcefully evicted without due process of law. A valid legal notice must be served, and grounds for eviction must comply with state laws.
+                    </p>
+<div class="bg-emerald-900/20 border border-emerald-500/20 rounded-lg p-3 text-emerald-300 text-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-lg mt-0.5">lightbulb</span>
+<span><strong>Tip:</strong> Do not sign arbitrary agreements waving your statutory rights.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Common Violations -->
+<section class="space-y-6">
+<h2 class="font-display text-xl font-bold text-slate-200">⚠️ Common Violations</h2>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="glass-panel bg-red-950/20 border-red-900/30 rounded-xl p-5 flex items-start gap-3">
+<span class="material-symbols-outlined text-red-400">power_off</span>
+<div>
+<h4 class="font-semibold text-red-200 text-sm">Utility Cut-offs</h4>
+<p class="text-slate-400 text-xs mt-1">Landlords cannot cut off water or electricity to force eviction.</p>
+</div>
+</div>
+<div class="glass-panel bg-amber-950/20 border-amber-900/30 rounded-xl p-5 flex items-start gap-3">
+<span class="material-symbols-outlined text-amber-400">vpn_key</span>
+<div>
+<h4 class="font-semibold text-amber-200 text-sm">Unlawful Entry</h4>
+<p class="text-slate-400 text-xs mt-1">Landlords must provide notice before entering the premises.</p>
+</div>
+</div>
+<div class="glass-panel bg-orange-950/20 border-orange-900/30 rounded-xl p-5 flex items-start gap-3">
+<span class="material-symbols-outlined text-orange-400">payments</span>
+<div>
+<h4 class="font-semibold text-orange-200 text-sm">Deposit Withholding</h4>
+<p class="text-slate-400 text-xs mt-1">Unjustified deduction from security deposits upon vacating.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Helplines -->
+<section class="glass-panel rounded-2xl p-8 bg-gradient-to-br from-indigo-900/20 to-slate-900/40 relative overflow-hidden">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiM2MzY2ZjEiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50"></div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="space-y-2 text-center md:text-left">
+<h2 class="font-display text-2xl font-bold text-slate-100">Need Immediate Help?</h2>
+<p class="font-body text-slate-400 text-sm">Contact these helplines for urgent legal assistance regarding housing disputes.</p>
+</div>
+<div class="flex flex-col gap-3 w-full md:w-auto">
+<a class="flex items-center justify-between gap-6 bg-slate-800/80 hover:bg-slate-700/80 transition-colors border border-white/5 rounded-xl px-5 py-3 group" href="tel:1930">
+<span class="font-headline font-medium text-slate-200 group-hover:text-indigo-300 transition-colors">National Legal Helpline</span>
+<span class="font-label font-bold text-indigo-400 tracking-wider">1930</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Disclaimer -->
+<div class="text-center mt-4">
+<p class="font-label text-xs text-slate-500 uppercase tracking-widest bg-slate-900/50 inline-block px-4 py-2 rounded-full border border-white/5">
+                NyaySetu AI provides information for awareness and is not a substitute for professional legal advice.
+            </p>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-slate-950/80 backdrop-blur-lg border-t border-white/5 opacity-80 hover:opacity-100 transition-opacity mt-auto">
+<div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-6">
+<div class="font-headline text-lg font-semibold text-slate-100">NyaySetu</div>
+<nav class="flex flex-wrap justify-center gap-x-8 gap-y-4 font-label text-xs uppercase tracking-wider text-slate-500">
+<a class="hover:text-indigo-300 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-indigo-300 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-indigo-300 transition-colors" href="#">Legal Disclaimer</a>
+<a class="hover:text-indigo-300 transition-colors" href="#">Contact Us</a>
+</nav>
+<div class="text-slate-500 font-label text-xs uppercase tracking-wider text-center mt-4">
+                © 2024 NyaySetu. Your Bridge to Justice. AI responses are for informational purposes only.
+            </div>
+</div>
+</footer>
+</body></html>

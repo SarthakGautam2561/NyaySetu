@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NyaySetu | Voice Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#e2dfff",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-high": "#e7e8e9",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-container": "#bc4800",
+                        "inverse-primary": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-tint": "#0053db",
+                        "primary-container": "#2563eb",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e1e3e4",
+                        "inverse-surface": "#2e3132",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-secondary-fixed": "#0f0069",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "surface-container": "#edeeef",
+                        "on-surface": "#191c1d",
+                        "on-surface-variant": "#434655",
+                        "surface": "#f8f9fa",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary": "#943700",
+                        "outline": "#737686",
+                        "on-primary-container": "#eeefff",
+                        "surface-bright": "#f8f9fa",
+                        "secondary": "#4b41e1",
+                        "on-secondary-container": "#fffbff",
+                        "on-tertiary-fixed": "#360f00",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-background": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "surface-dim": "#d9dadb",
+                        "secondary-container": "#645efb",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#3323cc",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary": "#ffffff",
+                        "primary": "#004ac6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "1.5rem",
+                        "xs": "0.5rem",
+                        "gutter": "24px",
+                        "xl": "3rem",
+                        "lg": "2rem",
+                        "sm": "1rem",
+                        "base": "4px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .waveform-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 120px;
+        }
+        .bar {
+            width: 6px;
+            background: linear-gradient(to top, #4b41e1, #2563eb);
+            border-radius: 99px;
+            animation: wave 1.2s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { height: 10px; opacity: 0.5; }
+            50% { height: 80px; opacity: 1; }
+        }
+        .glow-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(75, 65, 225, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(75, 65, 225, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(75, 65, 225, 0); }
+        }
+        .status-badge {
+            transition: all 0.5s ease;
+        }
+        .transcription-text {
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden">
+<!-- Immersive Background Image -->
+<div class="fixed inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center scale-105 blur-sm" data-alt="A dark, sophisticated legal workspace at night with subtle blue ambient lighting. In the background, blurred leather-bound law books and a minimalist glass desk are visible. The mood is calm, professional, and technologically advanced, reflecting the 'Precise Advocate' aesthetic of NyaySetu." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDi8sPlCs0riGBvJ18XrG6vEFkScvTYqbB0a5pani6COffmF2kWiDUWkvDxL-SEiZV5YQrVziscHOkM9DZ71xShO3S9cR5UgCZyLJJwMbsP8ueqfMSaaXMb08LMGdo4gNJuqSeDmSa7LqXRCP9z7on54cNhi9bxkuXluEmKwsfDG0cBq7LXZRyU46O1biPoErvuVukK-oSQIOM6OdqQ-XZM0Z_i8RMW9IHhvUMEFQWUapIPKria_s97Ww')"></div>
+<div class="absolute inset-0 bg-black/40"></div>
+</div>
+<!-- Voice Mode Overlay Container -->
+<main class="relative z-10 flex flex-col h-screen w-full items-center justify-between py-xl px-gutter glass-dark">
+<!-- Header: Identity -->
+<header class="flex flex-col items-center gap-xs">
+<h1 class="font-headline-md text-headline-md text-white tracking-tight">NyaySetu</h1>
+<p class="font-label-md text-label-md text-primary-fixed/60 uppercase tracking-widest">Precise Advocate AI</p>
+</header>
+<!-- Center: Waveform & Status -->
+<section class="flex flex-col items-center justify-center w-full max-w-md">
+<div class="mb-lg flex flex-col items-center gap-xs" id="status-container">
+<span class="status-badge flex items-center gap-2 px-md py-1 rounded-full bg-primary/20 border border-primary/30 text-primary-fixed" id="status-indicator">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-md text-label-md" id="status-text">Listening...</span>
+</span>
+</div>
+<div class="waveform-container" id="waveform">
+<!-- Generated by JS for random heights -->
+</div>
+<div class="mt-xl text-center">
+<p class="text-white/40 font-body-md italic">"What are the implications of Section 144 in this context?"</p>
+</div>
+</section>
+<!-- Bottom: Transcription & Controls -->
+<section class="w-full max-w-2xl flex flex-col items-center gap-xl">
+<!-- Real-time Transcription -->
+<div class="w-full transcription-text h-32 overflow-hidden flex flex-col justify-end">
+<div class="space-y-sm text-center" id="transcription-scroll">
+<p class="text-white/30 font-body-md">Processing previous context...</p>
+<p class="text-white/60 font-body-md">Checking legal database for precedents...</p>
+<p class="text-white font-body-lg text-headline-lg-mobile transition-all duration-700" id="live-text">
+                        According to the recent Supreme Court ruling, the constitutional validity...
+                    </p>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center gap-lg">
+<!-- Mute Toggle -->
+<button class="group flex flex-col items-center gap-2 transition-all hover:scale-105 active:scale-95" id="btn-mute">
+<div class="w-14 h-14 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-white/70 group-hover:bg-white/10 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[28px]" id="icon-mute">mic</span>
+</div>
+<span class="font-label-sm text-label-sm text-white/40 group-hover:text-white/60">Mute</span>
+</button>
+<!-- Stop/Main CTA -->
+<button class="group flex flex-col items-center gap-2 transition-all hover:scale-105 active:scale-95" id="btn-stop">
+<div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-white glow-pulse shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">stop</span>
+</div>
+<span class="font-label-sm text-label-sm text-white font-bold mt-1">Stop Analysis</span>
+</button>
+<!-- Exit Voice -->
+<button class="group flex flex-col items-center gap-2 transition-all hover:scale-105 active:scale-95" id="btn-exit">
+<div class="w-14 h-14 rounded-full border border-error/20 bg-error/5 flex items-center justify-center text-error/70 group-hover:bg-error/10 group-hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[28px]">close</span>
+</div>
+<span class="font-label-sm text-label-sm text-white/40 group-hover:text-white/60">Exit</span>
+</button>
+</div>
+</section>
+</main>
+<script>
+        // Waveform Generation
+        const waveform = document.getElementById('waveform');
+        const barCount = 18;
+        
+        for (let i = 0; i < barCount; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            // Stagger animations
+            bar.style.animationDelay = `${i * 0.1}s`;
+            // Vary initial height
+            bar.style.height = `${Math.random() * 40 + 20}px`;
+            waveform.appendChild(bar);
+        }
+
+        // Status Rotation Simulation
+        const statuses = [
+            { text: "Listening...", color: "bg-primary", borderColor: "border-primary/30", icon: "mic" },
+            { text: "Thinking...", color: "bg-amber-500", borderColor: "border-amber-500/30", icon: "psychology" },
+            { text: "Speaking...", color: "bg-emerald-500", borderColor: "border-emerald-500/30", icon: "volume_up" }
+        ];
+        
+        let currentStatus = 0;
+        const statusText = document.getElementById('status-text');
+        const statusIndicator = document.getElementById('status-indicator');
+        const liveText = document.getElementById('live-text');
+
+        function rotateStatus() {
+            currentStatus = (currentStatus + 1) % statuses.length;
+            const s = statuses[currentStatus];
+            
+            statusText.innerText = s.text;
+            statusIndicator.className = `status-badge flex items-center gap-2 px-md py-1 rounded-full ${s.borderColor} text-white transition-all duration-500`;
+            
+            // Adjust transcription based on status
+            if(s.text === "Thinking...") {
+                liveText.style.opacity = "0.4";
+                liveText.innerText = "NyaySetu is cross-referencing Penal Code updates...";
+            } else if(s.text === "Speaking...") {
+                liveText.style.opacity = "1";
+                liveText.innerText = "Under Section 144, the local authorities have the jurisdiction to restrict movement if there is an apprehension of danger.";
+            } else {
+                liveText.style.opacity = "0.7";
+                liveText.innerText = "Awaiting your clarification on the jurisdiction...";
+            }
+        }
+
+        setInterval(rotateStatus, 4000);
+
+        // UI Interactions
+        const btnMute = document.getElementById('btn-mute');
+        const iconMute = document.getElementById('icon-mute');
+        let isMuted = false;
+
+        btnMute.addEventListener('click', () => {
+            isMuted = !isMuted;
+            iconMute.innerText = isMuted ? 'mic_off' : 'mic';
+            btnMute.querySelector('span:last-child').innerText = isMuted ? 'Unmute' : 'Mute';
+            
+            if(isMuted) {
+                waveform.style.opacity = "0.2";
+                document.querySelectorAll('.bar').forEach(b => b.style.animationPlayState = 'paused');
+            } else {
+                waveform.style.opacity = "1";
+                document.querySelectorAll('.bar').forEach(b => b.style.animationPlayState = 'running');
+            }
+        });
+
+        // Exit Logic Simulation
+        document.getElementById('btn-exit').addEventListener('click', () => {
+            document.body.style.opacity = "0";
+            document.body.style.transition = "opacity 0.5s ease";
+            setTimeout(() => {
+                alert("Exiting Voice Mode. Returning to Dashboard.");
+            }, 500);
+        });
+    </script>
+</body></html>

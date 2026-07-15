@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NyaySetu - Know Your Rights</title>
+<!-- Tailwind CSS v3 CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- BEGIN: Custom Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'nyay-blue': '#4f46e5',
+            'nyay-bg': '#f8fafc',
+            'nyay-glass': 'rgba(255, 255, 255, 0.7)',
+            'nyay-sidebar-active': '#eef2ff',
+          },
+          backdropBlur: {
+            'xs': '2px',
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Custom Configuration -->
+<style data-purpose="custom-layouts">
+    /* Glassmorphism effect for cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.95);
+    }
+    /* Custom scrollbar for sidebar if content overflows */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-nyay-bg font-sans text-slate-800 antialiased h-screen overflow-hidden">
+<div class="flex h-full">
+<!-- BEGIN: Sidebar Navigation -->
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full overflow-y-auto custom-scrollbar" data-purpose="sidebar">
+<!-- Logo & Profile Section -->
+<div class="p-6 flex items-center space-x-3">
+<div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">
+          N
+        </div>
+<div>
+<h1 class="font-bold text-lg leading-tight">NyaySetu</h1>
+<p class="text-xs text-slate-500">Precise Advocate AI</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 px-4 py-2 space-y-1">
+<a class="flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span>🏠</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span>🧭</span>
+<span class="text-sm font-medium">Case Compass</span>
+</a>
+<a class="flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span>💬</span>
+<span class="text-sm font-medium">Chat</span>
+</a>
+<a class="flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span>📄</span>
+<span class="text-sm font-medium">Document X-Ray</span>
+</a>
+<a class="flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span>✍️</span>
+<span class="text-sm font-medium">Drafts</span>
+</a>
+<a class="flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span>🗺️</span>
+<span class="text-sm font-medium">Pathway</span>
+</a>
+<a class="flex items-center space-x-3 p-3 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors" href="#">
+<span>🎤</span>
+<span class="text-sm font-medium">Voice</span>
+</a>
+<!-- Active Item: Rights -->
+<a class="flex items-center space-x-3 p-3 rounded-xl bg-nyay-sidebar-active text-indigo-700 font-semibold shadow-sm ring-1 ring-indigo-50" href="#">
+<span>📚</span>
+<span class="text-sm">Rights</span>
+</a>
+</nav>
+<!-- Bottom Card: AI Power Branding -->
+<div class="p-4 mt-auto">
+<div class="bg-indigo-50 rounded-2xl p-4 border border-indigo-100">
+<p class="font-bold text-sm text-indigo-900 mb-1">Gemma 4 powered</p>
+<p class="text-[11px] text-indigo-700 leading-relaxed">Multilingual reasoning + document analysis + action plans.</p>
+</div>
+</div>
+</aside>
+<!-- END: Sidebar Navigation -->
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- BEGIN: Top Navigation Bar -->
+<header class="h-16 px-8 flex items-center justify-between bg-white/50 backdrop-blur-md border-b border-slate-200 z-10" data-purpose="top-nav">
+<!-- Search Input -->
+<div class="relative w-1/2 max-w-xl">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-xl bg-slate-50/50 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all" placeholder="Search laws, case types, or prompts" type="text"/>
+</div>
+<!-- Utility Icons -->
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-2 border border-slate-200 rounded-lg px-2 py-1 bg-white cursor-pointer hover:bg-slate-50">
+<span class="text-sm">🌐</span>
+<select class="border-none bg-transparent text-xs font-medium focus:ring-0 cursor-pointer">
+<option>English</option>
+<option>Hindi</option>
+<option>Marathi</option>
+</select>
+</div>
+<button class="text-xl hover:scale-110 transition-transform" title="Home">🏠</button>
+</div>
+</header>
+<!-- END: Top Navigation Bar -->
+<!-- BEGIN: Page Body -->
+<div class="flex-1 overflow-y-auto p-8 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-indigo-50/50 via-white to-white" data-purpose="scroll-container">
+<!-- Header Text -->
+<div class="mb-10">
+<div class="flex items-center space-x-3 mb-2">
+<span class="text-3xl">📚</span>
+<h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Know Your Rights</h2>
+</div>
+<p class="text-slate-500 text-lg max-w-2xl">
+            Select a category to explore your legal rights. Knowledge is your first line of defense.
+          </p>
+</div>
+<!-- BEGIN: Rights Categories Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" data-purpose="rights-grid">
+<!-- Category Card: Tenant Rights -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">🏠</div>
+<h3 class="font-bold text-slate-800 text-lg">Tenant Rights</h3>
+</div>
+<!-- Category Card: Consumer Rights -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">🛒</div>
+<h3 class="font-bold text-slate-800 text-lg">Consumer Rights</h3>
+</div>
+<!-- Category Card: Worker Rights -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">👷</div>
+<h3 class="font-bold text-slate-800 text-lg">Worker Rights</h3>
+</div>
+<!-- Category Card: Women's Rights -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">👩</div>
+<h3 class="font-bold text-slate-800 text-lg">Women's Rights</h3>
+</div>
+<!-- Category Card: Digital Rights -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">💻</div>
+<h3 class="font-bold text-slate-800 text-lg">Digital Rights</h3>
+</div>
+<!-- Category Card: Property Rights -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">🏗️</div>
+<h3 class="font-bold text-slate-800 text-lg">Property Rights</h3>
+</div>
+<!-- Category Card: Criminal Rights -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">⚖️</div>
+<h3 class="font-bold text-slate-800 text-lg">Criminal Rights</h3>
+</div>
+<!-- Category Card: Family Law -->
+<div class="glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center cursor-pointer aspect-square sm:aspect-auto sm:h-52">
+<div class="text-5xl mb-4">👨‍👩‍👧</div>
+<h3 class="font-bold text-slate-800 text-lg">Family Law</h3>
+</div>
+</div>
+<!-- END: Rights Categories Grid -->
+</div>
+<!-- END: Page Body -->
+</main>
+</div>
+</body></html>

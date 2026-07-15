@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voice Legal Assistant - NyaySetu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {},
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Sora", "sans-serif"],
+                        "display": ["Sora", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Space Grotesk", "sans-serif"]
+                    },
+                    "animation": {
+                        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    "keyframes": {
+                        'pulse-glow': {
+                            '0%, 100%': { 
+                                opacity: '1',
+                                transform: 'scale(1)',
+                                boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)'
+                            },
+                            '50%': { 
+                                opacity: '.8',
+                                transform: 'scale(1.05)',
+                                boxShadow: '0 0 40px rgba(239, 68, 68, 0.8)'
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0a0e1a; /* Dark navy background */
+            color: #f8fafc;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="font-body min-h-screen flex flex-col relative overflow-x-hidden antialiased">
+<!-- TopNavBar from JSON -->
+<nav class="fixed top-0 w-full z-50 bg-slate-900/50 backdrop-blur-md border-b border-white/10 shadow-xl transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center px-8 h-20 w-full">
+<div class="flex items-center gap-2">
+<span class="font-headline text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-violet-500">NyaySetu</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body text-slate-200 text-slate-400 hover:text-slate-100 transition-colors hover:bg-white/5 px-3 py-2 rounded-lg" href="#">Dashboard</a>
+<a class="font-body text-slate-200 text-slate-400 hover:text-slate-100 transition-colors hover:bg-white/5 px-3 py-2 rounded-lg" href="#">Document X-Ray</a>
+<a class="font-body text-slate-200 text-slate-400 hover:text-slate-100 transition-colors hover:bg-white/5 px-3 py-2 rounded-lg" href="#">My Documents</a>
+<a class="font-body text-slate-200 text-slate-400 hover:text-slate-100 transition-colors hover:bg-white/5 px-3 py-2 rounded-lg" href="#">Support</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-label font-medium px-5 py-2.5 rounded-lg hover:shadow-[0_0_15px_rgba(99,102,241,0.5)] transition-all">
+                    Consult AI
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center pt-28 pb-16 px-4 md:px-8 max-w-4xl mx-auto w-full relative z-10">
+<!-- Header Section -->
+<div class="text-center mb-12 flex flex-col items-center">
+<h1 class="font-headline text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">🎤 Voice Legal Assistant</h1>
+<p class="font-body text-slate-400 text-lg max-w-xl">Tap the microphone and describe your legal problem in any language.</p>
+</div>
+<!-- Hero: Microphone Button -->
+<div class="relative mb-16 flex justify-center items-center w-full">
+<!-- Pulsing outer ring -->
+<div class="absolute w-[180px] h-[180px] rounded-full border border-red-500/30 animate-pulse-glow pointer-events-none"></div>
+<button class="relative w-[140px] h-[140px] rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-[0_0_30px_rgba(99,102,241,0.4)] hover:shadow-[0_0_40px_rgba(99,102,241,0.6)] hover:scale-105 transition-all duration-300 z-10 group overflow-hidden">
+<!-- Inner glow overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-full"></div>
+<span class="material-symbols-outlined text-6xl text-white z-10 group-hover:scale-110 transition-transform duration-300" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+<!-- Recording indicator -->
+<div class="absolute -bottom-8 flex items-center gap-2 text-red-400 font-label text-sm font-medium animate-pulse">
+<div class="w-2 h-2 rounded-full bg-red-500"></div>
+                Listening...
+            </div>
+</div>
+<!-- Transcription Cards -->
+<div class="w-full max-w-2xl flex flex-col gap-6">
+<!-- User Input Card -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 self-end w-5/6 sm:w-3/4">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-300 text-sm">person</span>
+</div>
+<span class="font-label text-xs uppercase tracking-wider text-slate-400">You said:</span>
+</div>
+<p class="font-body text-slate-200 text-lg leading-relaxed">
+                    "My landlord is not returning my security deposit of 50,000 rupees."
+                </p>
+<!-- Subtle gradient accent line -->
+<div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-slate-600 to-slate-500 opacity-50"></div>
+</div>
+<!-- AI Response Card -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300 self-start w-full sm:w-11/12 border-l-4 border-l-indigo-500">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
+<span class="material-symbols-outlined text-indigo-400 text-sm" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<span class="font-headline font-semibold text-indigo-400">NyaySetu:</span>
+</div>
+<div class="font-body text-slate-300 text-base leading-relaxed space-y-4">
+<p>
+                        I understand you are facing an issue with your security deposit. In India, the return of a security deposit is governed by the terms of your rent agreement and local rent control laws.
+                    </p>
+<div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 mt-4">
+<h4 class="font-headline text-sm text-slate-200 mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-400 text-lg">info</span> Recommended Next Steps:
+                        </h4>
+<ul class="list-disc list-inside text-sm text-slate-400 space-y-1 ml-2">
+<li>Review your rental agreement for deduction clauses.</li>
+<li>Send a formal legal notice for recovery.</li>
+<li>Gather evidence of the deposit payment (receipts, bank transfers).</li>
+</ul>
+</div>
+</div>
+<!-- Subtle gradient accent line -->
+<div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-indigo-500 to-violet-500 opacity-20"></div>
+</div>
+</div>
+</main>
+<!-- Footer from JSON -->
+<footer class="w-full py-12 bg-slate-950/80 backdrop-blur-lg border-t border-white/5 relative z-50">
+<div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-6">
+<div class="font-headline text-lg font-semibold text-slate-100">NyaySetu</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label text-xs uppercase tracking-wider text-slate-500 hover:text-indigo-300 opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a>
+<a class="font-label text-xs uppercase tracking-wider text-slate-500 hover:text-indigo-300 opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-label text-xs uppercase tracking-wider text-slate-500 hover:text-indigo-300 opacity-80 hover:opacity-100 transition-opacity" href="#">Legal Disclaimer</a>
+<a class="font-label text-xs uppercase tracking-wider text-slate-500 hover:text-indigo-300 opacity-80 hover:opacity-100 transition-opacity" href="#">Contact Us</a>
+</div>
+<p class="font-label text-xs uppercase tracking-wider text-slate-500 text-center max-w-md">
+                © 2024 NyaySetu. Your Bridge to Justice. AI responses are for informational purposes only.
+            </p>
+</div>
+</footer>
+</body></html>

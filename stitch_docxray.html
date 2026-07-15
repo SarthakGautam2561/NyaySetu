@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NyaySetu - Document X-Ray</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-theme">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .nav-item-active {
+      background: rgba(219, 234, 254, 0.6);
+      color: #2563eb;
+      border-right: 4px solid #2563eb;
+    }
+    .upload-zone-dashed {
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='24' ry='24' stroke='%23CBD5E1' stroke-width='3' stroke-dasharray='12%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+      border-radius: 24px;
+    }
+  </style>
+</head>
+<body class="h-screen flex overflow-hidden">
+<!-- BEGIN: SideNavBar -->
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full" data-purpose="sidebar">
+<div class="p-6 flex items-center space-x-3" data-purpose="brand-logo">
+<div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+        N
+      </div>
+<div>
+<h1 class="font-bold text-slate-800 leading-none">NyaySetu</h1>
+<span class="text-xs text-slate-400">Precise Advocate AI</span>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+<a class="flex items-center space-x-3 px-3 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="#">
+<span class="text-xl">🏠</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="#">
+<span class="text-xl">🧭</span>
+<span class="font-medium">Case Compass</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="#">
+<span class="text-xl">💬</span>
+<span class="font-medium">Chat</span>
+</a>
+<!-- Active Link -->
+<a class="flex items-center space-x-3 px-3 py-3 nav-item-active rounded-lg transition-colors group" href="#">
+<span class="text-xl">📄</span>
+<span class="font-medium">Document X-Ray</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="#">
+<span class="text-xl">✍️</span>
+<span class="font-medium">Drafts</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="#">
+<span class="text-xl">🗺️</span>
+<span class="font-medium">Pathway</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="#">
+<span class="text-xl">🎤</span>
+<span class="font-medium">Voice</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-3 text-slate-600 hover:bg-slate-50 rounded-lg transition-colors group" href="#">
+<span class="text-xl">⚖️</span>
+<span class="font-medium">Rights</span>
+</a>
+</nav>
+<!-- Sidebar Footer -->
+<div class="p-4" data-purpose="sidebar-bottom-info">
+<div class="p-4 bg-indigo-50 rounded-2xl border border-indigo-100">
+<h4 class="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-1">Gemma 4 powered</h4>
+<p class="text-xs text-indigo-600 leading-relaxed">
+          Multilingual reasoning + document analysis + action plans.
+        </p>
+</div>
+</div>
+</aside>
+<!-- END: SideNavBar -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex flex-col min-w-0 bg-slate-50 overflow-hidden" data-purpose="main-application-area">
+<!-- BEGIN: TopNavBar -->
+<header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0" data-purpose="top-navigation">
+<div class="flex-1 max-w-2xl relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="text-slate-400">🔍</span>
+</div>
+<input class="w-full bg-slate-50 border-slate-200 rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all outline-none" placeholder="Search laws, case types, or prompts" type="text"/>
+</div>
+<div class="flex items-center space-x-6 ml-4">
+<div class="flex items-center space-x-2 bg-white border border-slate-200 rounded-full px-4 py-1.5 cursor-pointer hover:bg-slate-50 transition-colors">
+<span class="text-lg">🌐</span>
+<span class="text-sm font-medium text-slate-700">English</span>
+<span class="text-xs text-slate-400">▼</span>
+</div>
+<button class="text-xl hover:scale-110 transition-transform">🏠</button>
+</div>
+</header>
+<!-- END: TopNavBar -->
+<!-- BEGIN: Viewport -->
+<div class="flex-1 overflow-y-auto p-8 lg:p-12" data-purpose="content-viewport">
+<!-- Screen Header -->
+<div class="mb-10" data-purpose="page-title-section">
+<h2 class="text-3xl font-bold text-slate-900 mb-2">Document X-Ray</h2>
+<p class="text-slate-500">Analyze and extract insights from your legal documents with AI precision.</p>
+</div>
+<!-- BEGIN: Upload Container -->
+<div class="upload-zone-dashed flex flex-col items-center justify-center p-16 min-h-[450px] bg-white transition-all cursor-pointer group" data-purpose="drag-drop-zone">
+<!-- Icon Container -->
+<div class="mb-8 relative" data-purpose="upload-icon">
+<div class="w-20 h-20 bg-indigo-50 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+<div class="bg-indigo-600 rounded-lg p-3 shadow-lg relative">
+<!-- Simple SVG representation of the document/upload icon -->
+<svg fill="none" height="32" viewbox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 10V9C7 6.23858 9.23858 4 12 4C14.7614 4 17 6.23858 17 9V10C19.2091 10 21 11.7909 21 14C21 16.2091 19.2091 18 17 18H7C4.79086 18 3 16.2091 3 14C3 11.7909 4.79086 10 7 10Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M12 12V15M12 12L10 14M12 12L14 14" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+<h3 class="text-2xl font-semibold text-slate-800 mb-3">Drop your document here</h3>
+<p class="text-slate-500 text-center max-w-md">
+          or click to browse — <span class="font-medium text-slate-600">PDF, DOCX, TXT, MD (max 10 MB)</span>
+</p>
+<!-- Hidden Input for File selection -->
+<input accept=".pdf,.docx,.txt,.md" class="hidden" id="document-upload" type="file"/>
+</div>
+<!-- END: Upload Container -->
+<!-- Optional: Features/Status section below (minimalist) -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6" data-purpose="feature-hints">
+<div class="flex items-center space-x-4 p-4">
+<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">🔒</div>
+<div>
+<h4 class="font-semibold text-slate-800 text-sm">Secure Processing</h4>
+<p class="text-xs text-slate-500">End-to-end encrypted analysis</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 p-4">
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">⚡</div>
+<div>
+<h4 class="font-semibold text-slate-800 text-sm">Instant Extraction</h4>
+<p class="text-xs text-slate-500">Get key entities in seconds</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 p-4">
+<div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">⚖️</div>
+<div>
+<h4 class="font-semibold text-slate-800 text-sm">Legal Context</h4>
+<p class="text-xs text-slate-500">Cross-referenced with statutes</p>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Viewport -->
+</main>
+<!-- END: MainContent -->
+<script data-purpose="ui-interactivity">
+    // Add simple click handler to the upload zone to trigger the hidden file input
+    document.querySelector('[data-purpose="drag-drop-zone"]').addEventListener('click', () => {
+      document.getElementById('document-upload').click();
+    });
+
+    // Basic drag and drop visual feedback
+    const uploadZone = document.querySelector('[data-purpose="drag-drop-zone"]');
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+      uploadZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('bg-indigo-50/50');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      uploadZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('bg-indigo-50/50');
+      }, false);
+    });
+  </script>
+</body></html>
