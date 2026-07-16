@@ -2,7 +2,7 @@
 window.NyaySetu = window.NyaySetu || {};
 
 NyaySetu.Voice = {
-    recognition: null, isRecording: false, target: null,
+    recognition: null, isRecording: false, target: null, history: [],
     init() {
         const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SR) return;
@@ -45,10 +45,26 @@ NyaySetu.Voice = {
         const resDiv = document.getElementById('voiceResponse');
         const resText = document.getElementById('voiceResponseText');
         resDiv.classList.remove('hidden'); resText.textContent = 'Thinking...';
+        
+        // Add context for voice assistant: keep it brief, conversational, and avoid markdown.
+        const voicePrompt = text + " (IMPORTANT: I am talking to you via voice. Speak to me naturally. Keep your response short, under 3 sentences. Do not use lists, bullet points, asterisks, or markdown formatting.)";
+        
         let full = '';
-        NyaySetu.API.streamPost('/chat', { message: text, history: [], language: NyaySetu.I18n.current },
-            (c) => { full += c; resText.textContent = full; },
-            () => { if (window.speechSynthesis) { const u = new SpeechSynthesisUtterance(full.replace(/[*#_]/g,'').substring(0,500)); u.lang = this.recognition.lang; u.rate = 0.9; speechSynthesis.speak(u); } },
+        NyaySetu.API.streamPost('/chat', { message: voicePrompt, history: this.history, language: NyaySetu.I18n.current },
+            (c) => { full += c; resText.textContent = full.replace(/[*#_]/g,''); },
+            () => { 
+                this.history.push({ role: 'user', content: text });
+                this.history.push({ role: 'assistant', content: full });
+                if (this.history.length > 8) this.history = this.history.slice(-8); // keep last 4 turns
+                
+                if (window.speechSynthesis) { 
+                    const cleanText = full.replace(/[*#_]/g,'').substring(0,500);
+                    const u = new SpeechSynthesisUtterance(cleanText); 
+                    u.lang = this.recognition.lang; 
+                    u.rate = 0.95; 
+                    speechSynthesis.speak(u); 
+                } 
+            },
             (err) => { resText.textContent = 'Error: ' + err; }
         );
     }

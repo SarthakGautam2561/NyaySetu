@@ -9,6 +9,7 @@ NyaySetu.App = {
         if (typeof NyaySetu.Voice !== 'undefined' && NyaySetu.Voice.init) NyaySetu.Voice.init();
         if (typeof NyaySetu.Document !== 'undefined' && NyaySetu.Document.init) NyaySetu.Document.init();
         if (typeof NyaySetu.I18n !== 'undefined' && NyaySetu.I18n.init) NyaySetu.I18n.init();
+        if (typeof NyaySetu.Sessions !== 'undefined' && NyaySetu.Sessions.init) NyaySetu.Sessions.init();
         window.addEventListener('popstate', (e) => {
             if (e.state && e.state.view) this.navigate(e.state.view, false);
         });

@@ -68,13 +68,12 @@ NyaySetu.Sessions = {
     },
 
     async switchTo(sessionId) {
-        if (!sessionId || sessionId === this.activeId) return;
+        if (!sessionId) return;
         this.activeId = sessionId;
         NyaySetu.Session.id = sessionId;
         localStorage.setItem('nyaysetu_session_id', sessionId);
-        await NyaySetu.Chat.loadSession(sessionId, { preservePanel: true });
+        await NyaySetu.Chat.loadSession(sessionId);
         this.render();
-        NyaySetu.App.toast('Switched chat thread.', 'success');
     },
 
     async create() {
@@ -123,18 +122,18 @@ NyaySetu.Sessions = {
         if (!container) return;
         if (!this.list.length) {
             container.innerHTML = `
-                <div class="session-empty">
-                    <strong>No history yet</strong>
-                    <p>Open a case to start building memory.</p>
+                <div class="p-3 text-center text-on-surface-variant/60 text-sm">
+                    No history yet. Start a case to save history.
                 </div>`;
             return;
         }
         container.innerHTML = this.list.slice(0, 3).map((session) => {
-            const preview = session.last_message ? this._truncate(session.last_message, 72) : 'No messages yet';
+            const title = session.title || 'New case analysis';
+            const timeDesc = session.updated_at ? 'Active recently' : 'Saved case';
             return `
-                <div class="recent-item">
-                    <strong>${this._escapeHtml(session.title || 'New chat')}</strong>
-                    <span>${this._escapeHtml(preview)}</span>
+                <div class="p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer border border-primary/5 shadow-sm" onclick="NyaySetu.App.navigate('chat'); NyaySetu.Sessions.switchTo('${session.id}')">
+                    <p class="text-label-md font-bold text-on-surface truncate">${this._escapeHtml(title)}</p>
+                    <p class="text-[12px] text-outline-variant">${this._escapeHtml(timeDesc)}</p>
                 </div>`;
         }).join('');
     },

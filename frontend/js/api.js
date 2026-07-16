@@ -1,5 +1,5 @@
-/* NyaySetu API Client */
 window.NyaySetu = window.NyaySetu || {};
+NyaySetu.Session = NyaySetu.Session || { id: localStorage.getItem('nyaysetu_session_id') || null };
 
 NyaySetu.API = {
     BASE: window.location.origin + '/api',

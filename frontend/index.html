@@ -291,7 +291,7 @@ fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12
           <h3 class="font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">history</span>Recent History</h3>
           <a class="text-label-sm text-secondary hover:underline" href="#">View All</a>
         </div>
-        <div class="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-1">
+        <div class="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-1" id="recentHistoryWidget">
           <div class="p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer border border-primary/5"><p class="text-label-md font-bold text-on-surface truncate">Property Lease Violation</p><p class="text-[12px] text-outline-variant">Analyzed 2h ago</p></div>
           <div class="p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer border border-primary/5"><p class="text-label-md font-bold text-on-surface truncate">Consumer Rights Dispute</p><p class="text-[12px] text-outline-variant">Analyzed 5h ago</p></div>
           <div class="p-3 bg-white/50 rounded-xl hover:bg-white/80 transition-all cursor-pointer border border-primary/5"><p class="text-label-md font-bold text-on-surface truncate">Employment Termination</p><p class="text-[12px] text-outline-variant">Analyzed Yesterday</p></div>
@@ -321,8 +321,8 @@ fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12
 </section>
 
 <!-- ==================== CHAT ==================== -->
-<section id="view-chat" class="view" style="display:none">
-  <main class="main-content md:ml-64 flex flex-col h-screen">
+<section id="view-chat" class="view h-screen overflow-hidden" style="display:none">
+  <main class="main-content md:ml-64 flex flex-col h-full">
     <!-- Suggestions -->
     <div class="px-gutter py-3 border-b border-primary/5 overflow-x-auto flex gap-3 shrink-0 bg-white/50" id="chatSuggestions">
       <button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/30 text-label-md text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all whitespace-nowrap" onclick="NyaySetu.Chat.sendSuggestion(this)">My landlord is threatening to evict me</button>
@@ -332,7 +332,7 @@ fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12
       <button class="px-4 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/30 text-label-md text-on-surface-variant hover:bg-primary/5 hover:text-primary hover:border-primary/20 transition-all whitespace-nowrap" onclick="NyaySetu.Chat.sendSuggestion(this)">How do I file an RTI?</button>
     </div>
     <!-- Messages -->
-    <div class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-6 pb-32" id="chatMessages">
+    <div class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-6 pb-48" id="chatMessages">
       <div class="flex gap-4 max-w-3xl animate-fadeIn">
         <div class="w-9 h-9 rounded-xl bg-primary/10 flex-shrink-0 flex items-center justify-center mt-1"><span class="material-symbols-outlined text-primary text-[20px]">smart_toy</span></div>
         <div class="glass-card rounded-2xl rounded-tl-none p-5 shadow-sm">
@@ -359,8 +359,8 @@ fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12
 
 <!-- ==================== DOCUMENT X-RAY ==================== -->
 <section id="view-document" class="view">
-  <main class="main-content md:ml-64 flex-1 flex flex-col min-w-0 overflow-hidden">
-    <div class="flex-1 overflow-y-auto p-8 lg:p-12">
+  <main class="main-content md:ml-64 p-8 lg:p-12 min-h-screen">
+    <div class="max-w-4xl mx-auto">
       <div class="mb-10"><h2 class="text-3xl font-bold text-on-surface mb-2">Document X-Ray</h2><p class="text-on-surface-variant">Analyze and extract insights from your legal documents with AI precision.</p></div>
       <div class="upload-zone-dashed flex flex-col items-center justify-center p-16 min-h-[350px] bg-white transition-all cursor-pointer group" id="uploadZone" onclick="document.getElementById('fileInput').click()">
         <div class="mb-8"><div class="w-20 h-20 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300"><div class="bg-primary rounded-lg p-3 shadow-lg"><span class="material-symbols-outlined text-white text-[32px]">cloud_upload</span></div></div></div>
@@ -488,6 +488,7 @@ fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12
 <!-- JS -->
 <script src="/static/js/i18n.js"></script>
 <script src="/static/js/api.js"></script>
+<script src="/static/js/sessions.js"></script>
 <script src="/static/js/chat.js"></script>
 <script src="/static/js/document.js"></script>
 <script src="/static/js/drafts.js"></script>

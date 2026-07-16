@@ -293,7 +293,7 @@ async def stream_chat(
         return
 
     try:
-        response = client.models.generate_content_stream(
+        response = await client.aio.models.generate_content_stream(
             model=MODEL,
             contents=contents,
             config=genai.types.GenerateContentConfig(
@@ -304,7 +304,7 @@ async def stream_chat(
             ),
         )
 
-        for chunk in response:
+        async for chunk in response:
             if chunk.text:
                 yield chunk.text
     except Exception:
@@ -332,7 +332,7 @@ Provide your analysis as valid JSON following the schema in your instructions.""
         return _fallback_document_analysis(text, language)
 
     try:
-        response = client.models.generate_content(
+        response = await client.aio.models.generate_content(
             model=MODEL,
             contents=prompt,
             config=genai.types.GenerateContentConfig(
@@ -390,7 +390,7 @@ Create a complete, properly formatted legal document ready to be customized and 
         return
 
     try:
-        response = client.models.generate_content_stream(
+        response = await client.aio.models.generate_content_stream(
             model=MODEL,
             contents=prompt,
             config=genai.types.GenerateContentConfig(
@@ -400,7 +400,7 @@ Create a complete, properly formatted legal document ready to be customized and 
             ),
         )
 
-        for chunk in response:
+        async for chunk in response:
             if chunk.text:
                 yield chunk.text
     except Exception:
@@ -427,7 +427,7 @@ Respond with a structured JSON action plan following your instructions."""
         return _fallback_pathway(situation, language)
 
     try:
-        response = client.models.generate_content(
+        response = await client.aio.models.generate_content(
             model=MODEL,
             contents=prompt,
             config=genai.types.GenerateContentConfig(
@@ -473,7 +473,7 @@ Respond with structured JSON following your instructions."""
         return _fallback_rights(category, scenario, language)
 
     try:
-        response = client.models.generate_content(
+        response = await client.aio.models.generate_content(
             model=MODEL,
             contents=prompt,
             config=genai.types.GenerateContentConfig(
@@ -606,7 +606,7 @@ Return a JSON object matching the required schema."""
         return _fallback_intake(text, language)
 
     try:
-        response = client.models.generate_content(
+        response = await client.aio.models.generate_content(
             model=MODEL,
             contents=prompt,
             config=genai.types.GenerateContentConfig(

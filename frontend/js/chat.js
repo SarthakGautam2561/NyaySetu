@@ -59,5 +59,29 @@ NyaySetu.Chat = {
     },
     _md(t) {
         return t.replace(/\*\*(.*?)\*\*/g,'<strong class="text-primary font-bold">$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/^### (.*$)/gm,'<h4 class="font-semibold text-lg mt-3 mb-1 text-on-surface">$1</h4>').replace(/^## (.*$)/gm,'<h3 class="font-bold text-xl mt-4 mb-2 text-on-surface">$1</h3>').replace(/^\- (.*$)/gm,'<li class="ml-4 text-on-surface-variant">$1</li>').replace(/^\d+\. (.*$)/gm,'<li class="ml-4 text-on-surface-variant">$1</li>').replace(/\n\n/g,'</p><p class="mt-2">').replace(/\n/g,'<br>');
+    },
+    async loadSession(sessionId) {
+        try {
+            const data = await NyaySetu.API.get(`/sessions/${sessionId}/messages`);
+            const messages = data.messages || [];
+            const c = document.getElementById('chatMessages');
+            if (c) {
+                c.innerHTML = `
+                <div class="flex gap-4 max-w-3xl animate-fadeIn">
+                    <div class="w-9 h-9 rounded-xl bg-primary/10 flex-shrink-0 flex items-center justify-center mt-1"><span class="material-symbols-outlined text-primary text-[20px]">smart_toy</span></div>
+                    <div class="glass-card rounded-2xl rounded-tl-none p-5 shadow-sm">
+                      <p class="text-on-surface leading-relaxed"><strong>Welcome to NyaySetu!</strong> I'm your AI legal assistant. Tell me about your legal question, and I'll help you understand your rights in simple language.</p>
+                      <div class="mt-3 border-t border-primary/5 pt-3"><p class="text-[10px] text-outline uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">shield</span>This is not legal advice. For formal representation, consult a qualified attorney.</p></div>
+                    </div>
+                </div>`;
+                this.history = [];
+                for (const m of messages) {
+                    this._addBubble(m.role, this._md(m.content));
+                    this.history.push({ role: m.role, content: m.content });
+                }
+            }
+        } catch (e) {
+            console.error('Could not load session messages', e);
+        }
     }
 };
