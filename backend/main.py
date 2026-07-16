@@ -25,6 +25,7 @@ from database import (
 )
 import ai_engine
 import document_processor
+import exporter
 
 
 @asynccontextmanager
@@ -108,30 +109,47 @@ async def analyze_document(
     language: str = Form(default="en"),
     session_id: str = Form(default=""),
 ):
-    """Upload and analyze a legal document."""
+    """Upload and analyze a legal document or image contract."""
 
     # Validate file size (10 MB max)
     contents = await file.read()
     if len(contents) > 10 * 1024 * 1024:
         raise HTTPException(400, "File too large. Maximum size is 10 MB.")
 
-    # Validate file type
-    allowed = {".pdf", ".docx", ".txt", ".md"}
     ext = Path(file.filename).suffix.lower()
-    if ext not in allowed:
-        raise HTTPException(400, f"Unsupported format: {ext}. Supported: {', '.join(allowed)}")
+    allowed_docs = {".pdf", ".docx", ".txt", ".md"}
+    allowed_imgs = {".png", ".jpg", ".jpeg"}
+    
+    if ext not in allowed_docs and ext not in allowed_imgs:
+        raise HTTPException(400, f"Unsupported format: {ext}. Supported: PDF, DOCX, TXT, PNG, JPG, JPEG")
 
-    try:
-        text = document_processor.extract_text(contents, file.filename)
-    except ValueError as e:
-        raise HTTPException(400, str(e))
+    if ext in allowed_imgs:
+        # Determine MIME type
+        mime = "image/png" if ext == ".png" else "image/jpeg"
+        analysis = await ai_engine.analyze_image(contents, mime, language)
+        text_length = len(contents)
+    else:
+        try:
+            text = document_processor.extract_text(contents, file.filename)
+            analysis = await ai_engine.analyze_document(text, language)
+            text_length = len(text)
+        except ValueError as e:
+            if ext == ".pdf":
+                # Fallback: Send scanned PDF directly to Gemini's multimodal analyzer
+                try:
+                    analysis = await ai_engine.analyze_image(contents, "application/pdf", language)
+                    text_length = len(contents)
+                except Exception as ex:
+                    raise HTTPException(400, f"Multimodal analysis of scanned PDF failed: {str(ex)}")
+            else:
+                raise HTTPException(400, str(e))
 
-    analysis = await ai_engine.analyze_document(text, language)
     if session_id:
         await save_document_analysis(session_id, file.filename, analysis)
+        
     return {
         "filename": file.filename,
-        "text_length": len(text),
+        "text_length": text_length,
         "analysis": analysis,
     }
 
@@ -233,6 +251,30 @@ async def delete_session(session_id: str):
 @app.get("/api/sessions/{session_id}/messages")
 async def session_messages(session_id: str):
     return {"session_id": session_id, "messages": await get_recent_messages(session_id, limit=50)}
+
+
+@app.post("/api/draft/export")
+async def export_draft(request: dict):
+    content = request.get("content", "")
+    format_type = request.get("format", "pdf")
+    title = request.get("title", "Legal Draft")
+    if not content:
+        raise HTTPException(400, "Content is required")
+    
+    if format_type == "docx":
+        stream = exporter.export_docx(content, title)
+        media_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        filename = f"{title.replace(' ', '_')}.docx"
+    else:
+        stream = exporter.export_pdf(content, title)
+        media_type = "application/pdf"
+        filename = f"{title.replace(' ', '_')}.pdf"
+        
+    return StreamingResponse(
+        stream,
+        media_type=media_type,
+        headers={"Content-Disposition": f"attachment; filename={filename}"}
+    )
 
 
 # ── Serve the SPA ─────────────────────────────────────────────────────────

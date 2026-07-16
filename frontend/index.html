@@ -342,7 +342,7 @@ fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12
       </div>
     </div>
     <!-- Input Bar -->
-    <div class="absolute bottom-0 left-0 md:left-64 right-0 p-4 bg-gradient-to-t from-background via-background/90 to-transparent z-40">
+    <div class="bottom-0 left-0 md:left-64 right-0 p-4 bg-gradient-to-t from-background via-background/90 to-transparent z-40">
       <div class="max-w-3xl mx-auto">
         <div class="glass-card rounded-[20px] p-1 shadow-xl ring-1 ring-primary/5">
           <div class="bg-white rounded-[18px] flex items-center px-4 py-2">
@@ -365,8 +365,8 @@ fontSize:{"body-md":["16px",{lineHeight:"1.5",fontWeight:"400"}],"label-sm":["12
       <div class="upload-zone-dashed flex flex-col items-center justify-center p-16 min-h-[350px] bg-white transition-all cursor-pointer group" id="uploadZone" onclick="document.getElementById('fileInput').click()">
         <div class="mb-8"><div class="w-20 h-20 bg-primary/5 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300"><div class="bg-primary rounded-lg p-3 shadow-lg"><span class="material-symbols-outlined text-white text-[32px]">cloud_upload</span></div></div></div>
         <h3 class="text-2xl font-semibold text-on-surface mb-3">Drop your document here</h3>
-        <p class="text-on-surface-variant text-center max-w-md">or click to browse &mdash; <span class="font-medium text-on-surface">PDF, DOCX, TXT (max 10 MB)</span></p>
-        <input type="file" id="fileInput" class="hidden" accept=".pdf,.docx,.doc,.txt,.md" onchange="NyaySetu.Document.handleFile(this.files[0])">
+        <p class="text-on-surface-variant text-center max-w-md">or click to browse &mdash; <span class="font-medium text-on-surface">PDF, DOCX, TXT, PNG, JPG (max 10 MB)</span></p>
+        <input type="file" id="fileInput" class="hidden" accept=".pdf,.docx,.doc,.txt,.md,.png,.jpg,.jpeg" onchange="NyaySetu.Document.handleFile(this.files[0])">
       </div>
       <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="flex items-center space-x-4 p-4"><div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"><span class="material-symbols-outlined text-green-600">lock</span></div><div><h4 class="font-semibold text-on-surface text-sm">Secure Processing</h4><p class="text-xs text-on-surface-variant">End-to-end encrypted analysis</p></div></div>

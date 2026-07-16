@@ -365,6 +365,36 @@ Provide your analysis as valid JSON following the schema in your instructions.""
         }
 
 
+async def analyze_image(image_bytes: bytes, mime_type: str, language: str = "en") -> dict:
+    """Analyze a legal document image/photo directly using Gemini multimodal capability."""
+    if not _is_ai_available():
+        return _fallback_document_analysis("[Scanned Image Contract]", language)
+        
+    image_part = genai.types.Part.from_bytes(
+        data=image_bytes,
+        mime_type=mime_type
+    )
+    
+    prompt = f"Analyze this legal document image and respond in {LANGUAGE_NAMES.get(language, 'English')}. Provide your analysis as valid JSON following the schema in DOCUMENT_ANALYSIS_SYSTEM."
+    system_instruction = DOCUMENT_ANALYSIS_SYSTEM + _lang_instruction(language)
+    
+    try:
+        response = await client.aio.models.generate_content(
+            model=MODEL,
+            contents=[image_part, prompt],
+            config=genai.types.GenerateContentConfig(
+                system_instruction=system_instruction,
+                temperature=0.3,
+                max_output_tokens=4096,
+                response_mime_type="application/json",
+            ),
+        )
+        return json.loads(response.text)
+    except Exception as e:
+        return _fallback_document_analysis(f"[Multimodal analysis failed: {str(e)}]", language)
+
+
+
 # ── Draft Generation (streaming) ──────────────────────────────────────────
 
 async def stream_draft(
